@@ -7,6 +7,13 @@ from numpy.random import RandomState
 from sklearn.linear_model import LinearRegression
 from statsmodels.tsa.stattools import adfuller
 from scipy import signal
+from scipy import stats
+from statsmodels.tsa.api import VAR
+from statsmodels.tools.eval_measures import rmse, aic
+import pickle
+from statsmodels.stats.stattools import durbin_watson
+import statsmodels.tsa.stattools as ts
+from statsmodels.tsa.stattools import grangercausalitytests
 
 def cross_corr_coef(lag_time_series, lead_time_series, lag):
     # calculate the cross correlation between two time series
@@ -52,7 +59,8 @@ def create_statistics(label, rolling_window, return_csv_location, price_csv_loca
     standardised_price_df2 = standardised_price_df2.sort_index()
     standardised_price_mean2 = np.array(standardised_price_df2.mean(axis=0))
 
-    # adf test on original prices
+
+    # adf test on original prices: test if the price difference of the two time series is stationary
     price_df = pd.read_csv(price_csv_location, index_col=[0])
     price_df_series1 = price_df.iloc[:, ::2]
     price_df_series2 = price_df.iloc[:, 1::2]
@@ -64,6 +72,7 @@ def create_statistics(label, rolling_window, return_csv_location, price_csv_loca
         adf_result = adfuller(res)[1]
         p_values.append(adf_result)
     p_values = pd.Series(p_values)
+
 
     # Cross-correlation between series
     corr_ts1_lag_0 = []
@@ -90,6 +99,51 @@ def create_statistics(label, rolling_window, return_csv_location, price_csv_loca
     corr_ts2_lag_2 = pd.Series(corr_ts2_lag_2)
     corr_ts2_lag_3 = pd.Series(corr_ts2_lag_3)
 
+
+    ### Granger Causality test
+    durbin_watson_statistic1 = []
+    durbin_watson_statistic2 = []
+    co_integration_statistic = []
+    ts2_granger_cause_ts1 = []
+    ts1_granger_cause_ts2 = []
+    for i in range(248):
+        ts1 = price_df_series1.iloc[:, i]
+        ts2 = price_df_series2.iloc[:, i]
+        bivariate_time_series = np.array(pd.DataFrame([ts1, ts2]).transpose())
+        var_model = VAR(bivariate_time_series)
+        var_result_aic = []
+
+        for j in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
+            var_model_fit = var_model.fit(j)
+            var_result_aic.append(var_model_fit.aic)
+
+        var_lag = np.where(var_result_aic == np.min(var_result_aic))[0][0] + 1
+        our_var_model = VAR(bivariate_time_series)
+        our_var_model_fitted = our_var_model.fit(var_lag)
+
+        # durbin_watson_statistic detect the presence of autocorrelation at lag 1 in the residuals from the regression
+        durbin_watson_statistic = durbin_watson(our_var_model_fitted.resid)
+        durbin_watson_statistic1.append(durbin_watson_statistic[0])
+        durbin_watson_statistic2.append(durbin_watson_statistic[1])
+
+        # test if the two time series co-integrated
+        co_integration_statistic.append(ts.coint(ts1, ts2)[1])
+
+        # granger causality test, output p-value of the F-test
+        # For ts2_granger_cause_ts1, if p-value is less than 0.05, ts2 granger causes ts1, that is, the past values of ts2 have a statistically significant effect on the current value of ts1
+        bivariate_ts1_ts2 = np.array(pd.DataFrame([ts1, ts2]).transpose())
+        bivariate_ts2_ts1 = np.array(pd.DataFrame([ts2, ts1]).transpose())
+        ts2_granger_cause_ts1.append(grangercausalitytests(bivariate_ts1_ts2, [var_lag])[var_lag][0]["ssr_ftest"][1])
+        ts1_granger_cause_ts2.append(grangercausalitytests(bivariate_ts2_ts1, [var_lag])[var_lag][0]["ssr_ftest"][1])
+
+    durbin_watson_statistic1 = pd.Series(durbin_watson_statistic1)
+    durbin_watson_statistic2 = pd.Series(durbin_watson_statistic2)
+    co_integration_statistic = pd.Series(co_integration_statistic)
+    ts2_granger_cause_ts1 = pd.Series(ts2_granger_cause_ts1)
+    ts1_granger_cause_ts2 = pd.Series(ts1_granger_cause_ts2)
+
+
+    ### create new statistics data frame
     new_statistics = pd.DataFrame([
         standardised_price_mean1, standardised_price_mean2,
         return_mean1, return_mean2,
@@ -101,7 +155,10 @@ def create_statistics(label, rolling_window, return_csv_location, price_csv_loca
         p_values,
         corr_ts1_lag_0,
         corr_ts1_lag_1, corr_ts1_lag_2, corr_ts1_lag_3,
-        corr_ts2_lag_1, corr_ts2_lag_2, corr_ts2_lag_3])
+        corr_ts2_lag_1, corr_ts2_lag_2, corr_ts2_lag_3,
+        durbin_watson_statistic1, durbin_watson_statistic2, co_integration_statistic,
+        ts2_granger_cause_ts1, ts1_granger_cause_ts2
+        ])
     new_statistics = new_statistics.transpose()
     new_statistics.columns = [
         'standardised_price_mean1', 'standardised_price_mean2',
@@ -114,7 +171,9 @@ def create_statistics(label, rolling_window, return_csv_location, price_csv_loca
         'price_adf_p_values',
         'return_correlation_ts1_lag_0',
         'return_correlation_ts1_lag_1', 'return_correlation_ts1_lag_2', 'return_correlation_ts1_lag_3',
-        'return_correlation_ts2_lag_1', 'return_correlation_ts2_lag_2', 'return_correlation_ts2_lag_3']
+        'return_correlation_ts2_lag_1', 'return_correlation_ts2_lag_2', 'return_correlation_ts2_lag_3',
+        'durbin_watson_statistic1', 'durbin_watson_statistic2', 'co_integration_statistic',
+        'ts2_granger_cause_ts1', 'ts1_granger_cause_ts2']
     label_col_position = new_statistics.shape[1]
     new_statistics.insert(label_col_position, 'label', label, allow_duplicates=True)
 
@@ -150,9 +209,9 @@ def create_train_test_data(real_data, simulated_data, proportion):
     return x_train, y_train, x_test, y_test
 
 
-real_data = create_statistics(label="real", rolling_window=20, return_csv_location="/Users/changmao/Desktop/real_pair_returns.csv", price_csv_location="~/Desktop/real_pair_prices.csv")
-simulated_data = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/simulated_pair_returns.csv", price_csv_location="~/Desktop/simulated_pair_prices.csv")
-X_train, y_train, X_test, y_test = create_train_test_data(real_data, simulated_data, 0.75)
+real_statistics = create_statistics(label="real", rolling_window=20, return_csv_location="/Users/changmao/Desktop/real_pair_returns.csv", price_csv_location="~/Desktop/real_pair_prices.csv")
+simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/simulated_pair_returns.csv", price_csv_location="~/Desktop/simulated_pair_prices.csv")
+X_train, y_train, X_test, y_test = create_train_test_data(real_statistics, simulated_statistics, 0.75)
 
 
 random.seed(123)
@@ -167,17 +226,4 @@ print(f"Accuracy of predictions:  {accuracy_score(y_test,predictions):.3f}")
 # EDA.extensive_eda(X_train, y_train, save_path="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Return series classifier/AutoML...")
 # globals().clear()
 ######################################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
 
