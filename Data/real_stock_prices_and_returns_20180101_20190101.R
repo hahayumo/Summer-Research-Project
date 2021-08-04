@@ -1,3 +1,5 @@
+# This file presents how to obtain the historical adjusted closing prices of each stock in S&P 500 during 2018-01-01 and 2019-01-01 using R package "tidyquant".
+
 library(tidyquant)
 library(tidyverse) 
 
@@ -21,13 +23,12 @@ colnames(real_stock_prices) = real_stock_symbols
 row.names(real_stock_prices) = dates
 real_stock_prices = as.xts(real_stock_prices, date_col = dates)
 
-write.csv(real_stock_prices,"/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Data/real_stock_prices_20180101_20190101.csv", row.names = TRUE)
+# write.csv(real_stock_prices,"~/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/real_stock_prices_20180101_20190101.csv", row.names = TRUE)
 
+real_stock_returns = data.frame(
+  sapply(1:dim(real_stock_prices)[2], 
+         function(i){
+           100 * (log(real_stock_prices[,i][-1]) - log(real_stock_prices[,i][-dim(real_stock_prices)[1]]))}))
+colnames(real_stock_returns) = real_stock_symbols
 
-
-
-
-a = read.csv("/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/real_stock_prices_20180101_20190101.csv", row.names=1)
-
-x <- read.csv(url("https://github.com/hahayumo/Summer-Research-Project/tree/main/Data/real_stock_prices_20180101_20190101.csv"))
-
+# write.csv(real_stock_returns,"/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/real_stock_returns_20180101_20190101.csv", row.names = TRUE)
