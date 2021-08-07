@@ -242,3 +242,5 @@ print(res1.x)
 # res4 = minimize(loss_function, initial0, method='L-BFGS-B', tol=1e-6, options={'disp': True})
 # print(datetime.datetime.now() - begin_time4)
 # print(res4.x)
+
+

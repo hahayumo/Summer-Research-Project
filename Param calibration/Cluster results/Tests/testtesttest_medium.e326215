@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/var/spool/torque/mom_priv/jobs/326215.openpbs.mathscluster.ma.ic.ac.uk.SC", line 202, in <module>
+    result.to_csv("result.csv")
+AttributeError: 'list' object has no attribute 'to_csv'
+R[write to console]: Warning messages:
+
+R[write to console]: 1: 
+R[write to console]: In (function (package, help, pos = 2, lib.loc = NULL, character.only = FALSE,  :
+R[write to console]: 
+ 
+R[write to console]:  library ‘/usr/lib/R/site-library’ contains no packages
+
+R[write to console]: 2: 
+R[write to console]: In yuima.warn("'delta' (re)defined.") :
+R[write to console]:  
+YUIMA: 'delta' (re)defined.
+
+

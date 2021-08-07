@@ -1,5 +1,11 @@
-# Obtain 4 true values of parameters for the Ornstein-Uhlenbeck process by calibrating the model to the real market pair stocks from S&P 500
+#!/bin/bash
+#PBS -N ou44_multiprocesstest_standard
+#PBS -m bea
+#PBS -q standard
+cd ${HOME}
+/usr/bin/python3 ou44_multiprocesstest_standard.py
 
+# Obtain 4 true values of parameters for the Ornstein-Uhlenbeck process by calibrating the model to the real market pair stocks from S&P 500
 
 import pandas as pd
 import numpy as np
@@ -136,58 +142,177 @@ def loss_function(params):
 
 n_real_price = pd.read_csv("real_pair_prices.csv", index_col=[0])
 n_real_log_price = price_to_log_price(n_real_price)
-
 n_real_return = pd.read_csv("real_pair_returns.csv", index_col=[0])
 n_real_stats = cal_stats(n_return=n_real_return, n_price=None)
 
 # fixed constants are:
 mu11, mu21, sigma12, sigma21 = 0, 0, -1000, -1000
-
 xinit = [4, 5]
-
 num_sim, T0, T, length = n_real_stats.shape[0], 0, 1, n_real_price.shape[0]
 # num_sim 248 and length 250
 
 
 
 # The calibration process can be seen as a process of seeking for a set of values of the parameters such that the simulations are the closest to the real data in a sense that the feature statistics of simulations are matched with those of real returns such that the total losses are minimised. Also, we will see the losses of moments.
-
 np.random.seed(9868)
-
+random_seeds = np.random.randint(low=0, high=44001, size=(50,))
 initial0 = [1, 1, 1, 1]
 
-# Look at the optimisation results
-begin_time = datetime.datetime.now()
-res = minimize(loss_function, initial0, method='Powell',
-               tol=1e-6, options={'disp': True})
-print(res.x)
 
-# Look at the running time
-time = datetime.datetime.now() - begin_time
-print(time)
+def multi_process(iter):
+    print(iter)
 
-# Look at the scales of losses of different moments
+    np.random.seed(random_seeds[iter])
+
+    # Look at the optimisation results
+    begin_time = datetime.datetime.now()
+    res = minimize(loss_function, initial0, method='Powell',
+                   tol=1e-6, options={'disp': True})
+    print(res.x)
+
+    # Look at the running time
+    time = datetime.datetime.now() - begin_time
+    print(time)
+
+    # Look at the scales of losses of different moments
+    losses = loss_function((params))
+    params = (res.x)
+    params = FloatVector(params)
+    moment_loss = pd.DataFrame().reindex_like(n_real_stats)
+    randseed = np.random.randint(low=0, high=1000000, size=(1,))
+    n_sim_log_price = n_ou_simulation(
+        random_seed=int(randseed), num_sim=num_sim,
+        mu11=mu11, mu12=params[0], mu21=mu21, mu22=params[1],
+        sigma11=params[2], sigma12=sigma12, sigma21=sigma21, sigma22=params[3],
+        xinit=xinit, T0=T0, T=T, length=length)
+
+    n_sim_price = log_price_to_price(n_sim_log_price)
+    n_sim_return = price_to_return(n_sim_price)
+    n_sim_stats = cal_stats(n_sim_return)
+
+    for k in range(n_real_stats.shape[0]):
+        for j in range(n_real_stats.shape[1]):
+            moment_loss.iloc[k, j] = np.sqrt((n_real_stats.iloc[k, j] -
+                                              n_sim_stats.iloc[k, j]) ** 2)
+
+    sum_all = np.sum(moment_loss)
+    print(sum_all)
+    n_sim_price.to_csv("ou_4params_price.csv")
+    n_sim_return.to_csv("ou_4params_return.csv")
+    res.x.to_csv("res_x_result.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Simulation Study
+#Set values. We will do a simulation study by generating pair series 1000 times with length of each series 250 (approx one-year data in real market).
+random_seed = 9868
+
+mu12, mu22, sigma11, sigma22 = params
+
+num_sim, T0, T, length = 500, 0, 1, 250
+
+# Set the simulation generated from the model with the obtained parameters as the real data.
 np.random.seed(9868)
-params = (res.x)
-params = FloatVector(params)
-moment_loss = pd.DataFrame().reindex_like(n_real_stats)
-randseed = np.random.randint(low=0, high=1000000, size=(1,))
-n_sim_log_price = n_ou_simulation(
-    random_seed=int(randseed), num_sim=num_sim,
-    mu11=mu11, mu12=params[0], mu21=mu21, mu22=params[1],
-    sigma11=params[2], sigma12=sigma12, sigma21=sigma21, sigma22=params[3],
+n_real_log_price = n_ou_simulation(
+    random_seed=random_seed, num_sim=num_sim,
+    mu11=mu11, mu12=mu12, mu21=mu21, mu22=mu22,
+    sigma11=sigma11, sigma12=sigma12, sigma21=sigma21, sigma22=sigma22,
     xinit=xinit, T0=T0, T=T, length=length)
+n_real_price = log_price_to_price(n_log_price=n_real_log_price)
+n_real_return = price_to_return(n_price=n_real_price)
+n_real_stats = cal_stats(n_return=n_real_return, n_price=None)
 
-n_sim_price = log_price_to_price(n_sim_log_price)
-n_sim_return = price_to_return(n_sim_price)
-n_sim_stats = cal_stats(n_sim_return)
+# See the effect on the losses by different moments
+np.random.seed(9868)
 
-for k in range(n_real_stats.shape[0]):
-    for j in range(n_real_stats.shape[1]):
-        moment_loss.iloc[k, j] = np.sqrt((n_real_stats.iloc[k, j] -
-                                          n_sim_stats.iloc[k, j]) ** 2)
+params_vec = [(mu12, mu22, sigma11, sigma22),
+              (mu12-1, mu22, sigma11, sigma22), (mu12-0.1, mu22, sigma11, sigma22), (mu12+1, mu22, sigma11, sigma22),
+              (mu12, mu22-1, sigma11, sigma22), (mu12, mu22-0.1, sigma11, sigma22), (mu12, mu22+1, sigma11, sigma22),
+              (mu12, mu22, sigma11-1, sigma22), (mu12, mu22, sigma11-0.1, sigma22), (mu12, mu22, sigma11+1, sigma22),
+              (mu12, mu22, sigma11, sigma22-1), (mu12, mu22, sigma11, sigma22-0.1), (mu12, mu22, sigma11, sigma22+1)]
+for i in params_vec:
+    print(i, loss_function(i))
 
-sum_all = np.sum(moment_loss)
-print(sum_all)
-# n_sim_price.to_csv("ou_4params_price.csv")
-# n_sim_return.to_csv("ou_4params_return.csv")
+
+# We can iterate the optimisation 5 times and see the results.
+np.random.seed(9868)
+initial0 = [1, 1, 1, 1]
+results = []
+
+for num_iter in range(5):
+
+    # look at the ith iteration
+    print(num_iter)
+
+    begin_time = datetime.datetime.now()
+    print(begin_time)
+
+    # look at the results of the optimisation
+    res = minimize(loss_function, initial0, method='Powell', tol=1e-6, options={'disp': True})
+    print(res.x)
+
+    # look at the time consumed
+    time = datetime.datetime.now() - begin_time
+    print(time)
+
+    #  look at the losses of moments
+    moment_loss = pd.DataFrame().reindex_like(n_real_stats)
+    randseed = np.random.randint(low=0, high=1000000, size=(1,))
+    n_sim_log_price = n_ou_simulation(
+        random_seed=int(randseed), num_sim=num_sim,
+        mu11=mu11, mu12=params[0], mu21=mu21, mu22=params[1],
+        sigma11=params[2], sigma12=sigma12, sigma21=sigma21, sigma22=params[3],
+        xinit=xinit, T0=T0, T=T, length=length)
+
+    n_sim_price = log_price_to_price(n_sim_log_price)
+    n_sim_return = price_to_return(n_sim_price)
+    n_sim_stats = cal_stats(n_sim_return)
+
+    for i in range(n_real_stats.shape[0]):
+        for j in range(n_real_stats.shape[1]):
+            moment_loss.iloc[i, j] = np.sqrt((n_real_stats.iloc[i, j] - n_sim_stats.iloc[i, j]) ** 2)
+
+    sum_all = np.sum(moment_loss)
+    print(sum_all)
+
+    results.append([res.x, time, sum_all])
+
+
+# See the mean and standard deviation of the optimisation results.
+results_res = []
+results_time = []
+results_sum_all = []
+for i in results:
+    results_res.append(i[0])
+    results_time.append(i[1])
+    results_sum_all.append(i[2])
+
+res_mean = pd.DataFrame(results_res).mean(axis=0)
+res_std  = pd.DataFrame(results_res).std(axis=0)
+print(res_mean)
+print(res_std)
+print(params)

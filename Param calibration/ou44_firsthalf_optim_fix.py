@@ -1,5 +1,9 @@
-# Obtain 4 true values of parameters for the Ornstein-Uhlenbeck process by calibrating the model to the real market pair stocks from S&P 500
+#!/usr/bin/python3
+#PBS -N ou44firsthalf_standard
+#PBS -m bea
+#PBS -q standard
 
+# Obtain 4 true values of parameters for the Ornstein-Uhlenbeck process by calibrating the model to the real market pair stocks from S&P 500
 
 import pandas as pd
 import numpy as np
@@ -13,7 +17,6 @@ from rpy2.robjects.packages import importr
 from rpy2.robjects.packages import SignatureTranslatedAnonymousPackage
 import datetime
 from rpy2.robjects.vectors import FloatVector
-
 
 
 # Define the model that generates pair simulations.
@@ -66,28 +69,23 @@ def n_ou_simulation(random_seed, num_sim,
     return n_ou_sim_data
 
 
-
 # Define some function that transforms price to return or the reverse.
 def price_to_log_price(n_price):
     return(np.log(n_price))
-
 def log_price_to_price(n_log_price):
     return(np.exp(n_log_price))
-
 def price_to_return(n_price):
     n_return = pd.DataFrame()
     for i in range(n_price.shape[1]):
         ith_column_price_series = n_price.iloc[:, i]
         n_return = pd.concat([n_return, 100 * np.log(ith_column_price_series[1:].values / ith_column_price_series[:-1])], axis=1)
     return n_return
-
 def log_price_to_return(n_log_price):
     n_real_return = pd.DataFrame()
     for i in range(n_log_price.shape[1]):
         ith_column_price_series = n_log_price.iloc[:, i]
         n_real_return = pd.concat([n_real_return, 100 * (ith_column_price_series[1:].values - ith_column_price_series[:-1])], axis=1)
     return n_real_return
-
 
 
 # Define the function of transforming returns data into feature statistics (or moments).
@@ -106,7 +104,6 @@ def cal_stats(n_return, n_price=None):
         'return_mean1', 'return_mean2',
         'return_sd1', 'return_sd2']
     return stats_data
-
 
 
 # Define the loss function as the sum of the absolute differences between moments of real market return data and simulated return data
@@ -130,64 +127,157 @@ def loss_function(params):
     return np.sum(sum_all)
 
 
-
 # Import the real market pair return data and prepare the corresponding initial log-prices of pair stocks for the following simulation and optimisation work.
 # 4 params are: mu12, mu22, sigma11, sigma22
 
 n_real_price = pd.read_csv("real_pair_prices.csv", index_col=[0])
 n_real_log_price = price_to_log_price(n_real_price)
-
 n_real_return = pd.read_csv("real_pair_returns.csv", index_col=[0])
 n_real_stats = cal_stats(n_return=n_real_return, n_price=None)
 
 # fixed constants are:
 mu11, mu21, sigma12, sigma21 = 0, 0, -1000, -1000
-
 xinit = [4, 5]
-
 num_sim, T0, T, length = n_real_stats.shape[0], 0, 1, n_real_price.shape[0]
 # num_sim 248 and length 250
-
 
 
 # The calibration process can be seen as a process of seeking for a set of values of the parameters such that the simulations are the closest to the real data in a sense that the feature statistics of simulations are matched with those of real returns such that the total losses are minimised. Also, we will see the losses of moments.
 
 np.random.seed(9868)
-
-initial0 = [1, 1, 1, 1]
+initial0 = np.array([1, 1, -1, -1])
 
 # Look at the optimisation results
 begin_time = datetime.datetime.now()
-res = minimize(loss_function, initial0, method='Powell',
-               tol=1e-6, options={'disp': True})
+res = minimize(loss_function, initial0, method='Powell', tol=1e-6, options={'disp': True})
 print(res.x)
-
 # Look at the running time
 time = datetime.datetime.now() - begin_time
 print(time)
-
+params = res.x
 # Look at the scales of losses of different moments
-np.random.seed(9868)
-params = (res.x)
-params = FloatVector(params)
-moment_loss = pd.DataFrame().reindex_like(n_real_stats)
-randseed = np.random.randint(low=0, high=1000000, size=(1,))
-n_sim_log_price = n_ou_simulation(
-    random_seed=int(randseed), num_sim=num_sim,
-    mu11=mu11, mu12=params[0], mu21=mu21, mu22=params[1],
-    sigma11=params[2], sigma12=sigma12, sigma21=sigma21, sigma22=params[3],
-    xinit=xinit, T0=T0, T=T, length=length)
+print(loss_function(params))np.random.seed(9868)
+initial0 = [1, 1, -1, -1]
+initial0 = np.array([1, 1, -1, -1])
+"""Optimization terminated successfully.
+         Current function value: 235.933669
+         Iterations: 4
+         Function evaluations: 408
+[-0.02013488  0.05457829 -1.36604953 -1.31668316]
+0:10:46.478932
+243.19825014255315"""
 
-n_sim_price = log_price_to_price(n_sim_log_price)
-n_sim_return = price_to_return(n_sim_price)
-n_sim_stats = cal_stats(n_sim_return)
 
-for k in range(n_real_stats.shape[0]):
-    for j in range(n_real_stats.shape[1]):
-        moment_loss.iloc[k, j] = np.sqrt((n_real_stats.iloc[k, j] -
-                                          n_sim_stats.iloc[k, j]) ** 2)
+begin_time = datetime.datetime.now()
+res = minimize(loss_function, initial0, method='Powell', tol=1e-4, options={'disp': True})
+print(res.x)
+time = datetime.datetime.now() - begin_time
+print(time)
+params = res.x
+print(loss_function(params))
+"""Optimization terminated successfully.
+         Current function value: 232.335541
+         Iterations: 5
+         Function evaluations: 385
+[ 0.00503185  0.04525598 -1.35634283 -1.31982663]
+0:10:11.096058
+242.4519109534089"""
 
-sum_all = np.sum(moment_loss)
-print(sum_all)
-# n_sim_price.to_csv("ou_4params_price.csv")
-# n_sim_return.to_csv("ou_4params_return.csv")
+begin_time = datetime.datetime.now()
+res = minimize(loss_function, initial0, method='Powell', tol=1e-2, options={'disp': True})
+print(res.x)
+time = datetime.datetime.now() - begin_time
+print(time)
+params = res.x
+print(loss_function(params))
+"""Optimization terminated successfully.
+         Current function value: 249.772540
+         Iterations: 5
+         Function evaluations: 160
+[ 0.04193865  0.03143968 -1.47685232 -1.30297942]
+0:04:29.437266
+242.11279872921182"""
+
+begin_time = datetime.datetime.now()
+res = minimize(loss_function, initial0, method='Powell', tol=1e-1, options={'disp': True})
+print(res.x)
+time = datetime.datetime.now() - begin_time
+print(time)
+params = res.x
+print(loss_function(params))
+"""Optimization terminated successfully.
+         Current function value: 260.853229
+         Iterations: 4
+         Function evaluations: 110
+[ 0.10741226  0.1045121  -1.4269919  -1.30411352]
+0:03:05.866647
+265.08132243850537"""
+
+begin_time = datetime.datetime.now()
+res = minimize(loss_function, initial0, method='Powell', tol=1, options={'disp': True})
+print(res.x)
+time = datetime.datetime.now() - begin_time
+print(time)
+params = res.x
+print(loss_function(params))
+"""Optimization terminated successfully.
+         Current function value: 527.217756
+         Iterations: 1
+         Function evaluations: 21
+[ 0.38196603  0.38196603 -1.61803397 -1.61803397]
+0:00:34.399191
+524.976865955762"""
+
+#begin_time = datetime.datetime.now()
+#res = minimize(fun=loss_function, x0=initial0, method='BFGS', tol=1e-4, options={'disp': True})
+#print(res.x)
+#time = datetime.datetime.now() - begin_time
+#print(time)
+#params = res.x
+#print(loss_function(params))
+#res = minimize(fun=loss_function, x0=initial0, method='BFGS', options={'disp': True})
+"""Warning: Desired error not necessarily achieved due to precision loss.
+         Current function value: 888.106777
+         Iterations: 1
+         Function evaluations: 121
+         Gradient evaluations: 22"""
+
+#print('Default')
+#begin_time = datetime.datetime.now()
+#res = minimize(fun=loss_function, x0=initial0, options={'disp': True})
+#print(res.x)
+#time = datetime.datetime.now() - begin_time
+#print(time)
+#params = res.x
+#print(loss_function(params))
+"""Default
+Warning: Desired error not necessarily achieved due to precision loss.
+         Current function value: 883.564176
+         Iterations: 0
+         Function evaluations: 127
+         Gradient evaluations: 23
+[ 1.  1. -1. -1.]
+0:03:15.512390
+898.2720409117037"""
+
+from scipy.optimize import basinhopping
+begin_time = datetime.datetime.now()
+minimizer_kwargs = {"method":"L-BFGS-B", "jac":True}
+ret = basinhopping(loss_function, x0=initial0, minimizer_kwargs=minimizer_kwargs, niter=200)
+print(ret.x)
+time = datetime.datetime.now() - begin_time
+print(time)
+params = res.x
+print(loss_function(params))
+
+
+
+
+
+
+
+
+
+
+
+

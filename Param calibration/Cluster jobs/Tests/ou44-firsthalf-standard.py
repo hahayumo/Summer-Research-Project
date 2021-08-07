@@ -1,5 +1,9 @@
-# Obtain 4 true values of parameters for the Ornstein-Uhlenbeck process by calibrating the model to the real market pair stocks from S&P 500
+#!/usr/bin/python3
+#PBS -N ou44firsthalf_standard
+#PBS -m bea
+#PBS -q standard
 
+# Obtain 4 true values of parameters for the Ornstein-Uhlenbeck process by calibrating the model to the real market pair stocks from S&P 500
 
 import pandas as pd
 import numpy as np

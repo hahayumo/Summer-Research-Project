@@ -1,0 +1,11 @@
+Optimization terminated successfully.
+         Current function value: 237.039817
+         Iterations: 4
+         Function evaluations: 433
+[-0.01353338  0.04907877 -1.39139002 -1.38006887]
+0:35:28.182603
+return_mean1     27.299273
+return_mean2     29.739016
+return_sd1       80.096673
+return_sd2      102.213862
+dtype: float64

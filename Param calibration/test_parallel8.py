@@ -1,5 +1,10 @@
-# Obtain 4 true values of parameters for the Ornstein-Uhlenbeck process by calibrating the model to the real market pair stocks from S&P 500
+#!/usr/bin/python3
+#PBS -N testtesttest_parallel8
+#PBS -m bea
+#PBS -q parallel8
 
+
+# Obtain 4 true values of parameters for the Ornstein-Uhlenbeck process by calibrating the model to the real market pair stocks from S&P 500
 
 import pandas as pd
 import numpy as np
@@ -158,36 +163,41 @@ initial0 = [1, 1, 1, 1]
 
 # Look at the optimisation results
 begin_time = datetime.datetime.now()
-res = minimize(loss_function, initial0, method='Powell',
-               tol=1e-6, options={'disp': True})
-print(res.x)
 
 # Look at the running time
 time = datetime.datetime.now() - begin_time
 print(time)
 
-# Look at the scales of losses of different moments
-np.random.seed(9868)
-params = (res.x)
-params = FloatVector(params)
-moment_loss = pd.DataFrame().reindex_like(n_real_stats)
-randseed = np.random.randint(low=0, high=1000000, size=(1,))
-n_sim_log_price = n_ou_simulation(
-    random_seed=int(randseed), num_sim=num_sim,
-    mu11=mu11, mu12=params[0], mu21=mu21, mu22=params[1],
-    sigma11=params[2], sigma12=sigma12, sigma21=sigma21, sigma22=params[3],
-    xinit=xinit, T0=T0, T=T, length=length)
+a = n_ou_simulation(9868, 248,
+                    mu11, 0.04, mu21, 0.03, -1.41, sigma12, sigma21, -1.35,
+                    [4, 5], 0, 1, 250)
 
-n_sim_price = log_price_to_price(n_sim_log_price)
-n_sim_return = price_to_return(n_sim_price)
-n_sim_stats = cal_stats(n_sim_return)
+print(a)
+print(4+5)
+a.to_csv("a.csv")
 
-for k in range(n_real_stats.shape[0]):
-    for j in range(n_real_stats.shape[1]):
-        moment_loss.iloc[k, j] = np.sqrt((n_real_stats.iloc[k, j] -
-                                          n_sim_stats.iloc[k, j]) ** 2)
+import multiprocessing
+def multi_process(iter):
 
-sum_all = np.sum(moment_loss)
-print(sum_all)
-# n_sim_price.to_csv("ou_4params_price.csv")
-# n_sim_return.to_csv("ou_4params_return.csv")
+    print(iter)
+    print('begintime')
+    print(datetime.datetime.now())
+    loss_function(([1, 1, 1, 1]))
+    loss_function(([2, 1, 1, 1]))
+    loss_function(([3, 1, 1, 1]))
+    loss_function(([4, 1, 1, 1]))
+    loss_function(([5, 1, 1, 1]))
+    loss_function(([6, 1, 1, 1]))
+    loss_function(([7, 1, 1, 1]))
+    loss_function(([8, 1, 1, 1]))
+    loss_function(([9, 1, 1, 1]))
+    loss_function(([10, 1, 1, 1]))
+    return (iter, iter, iter)
+
+
+num_iter = [i for i in range(100)]
+pool = multiprocessing.Pool()
+result = pool.map(multi_process, num_iter)
+
+pd.DataFrame(result).to_csv("result.csv")
+

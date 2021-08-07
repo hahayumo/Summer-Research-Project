@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/var/spool/torque/mom_priv/jobs/326216.openpbs.mathscluster.ma.ic.ac.uk.SC", line 202, in <module>
+    pd.DataFrame.result.to_csv("result.csv")
+AttributeError: type object 'DataFrame' has no attribute 'result'
+R[write to console]: Warning messages:
+
+R[write to console]: 1: 
+R[write to console]: In (function (package, help, pos = 2, lib.loc = NULL, character.only = FALSE,  :
+R[write to console]: 
+ 
+R[write to console]:  library ‘/usr/lib/R/site-library’ contains no packages
+
+R[write to console]: 2: 
+R[write to console]: In yuima.warn("'delta' (re)defined.") :
+R[write to console]:  
+YUIMA: 'delta' (re)defined.
+
+
