@@ -45,33 +45,37 @@ for (i in 1:(dim(real_stock_prices)[2]-1)){
     position_vector = c(position_vector, paste0("row", i, "column", j))
   }
 }
+
 warnings = warnings()
 stock = tq_index("SP500")
 stock_symbols = stock$symbol
-real_stock_symbols = stock_symbols[-c(match(c("BRK.B","DOW","CARR","OTIS","CTVA","BF.B","FOXA","OGN","FOX", "VSCO"),stock_symbols))]
+real_stock_symbols = stock_symbols[-c(match(c("BRK.B","MRNA","DOW","CARR","OTIS","CTVA","BF.B","FOXA","OGN","FOX", "VSCO"), stock_symbols))]
+real_stock_symbols = c(real_stock_symbols, "ALXN")
 colnames(p_value_matrix) = real_stock_symbols
 row.names(p_value_matrix) = real_stock_symbols
 
 
 
-write.csv(p_value_matrix, paste0(folder_path, data_path, paste0(date_path, "_p_value_matrix.csv")), row.names = TRUE)
 write.csv(p_value_vector, paste0(folder_path, data_path, paste0(date_path, "_p_value_vector.csv")))
+write.csv(p_value_matrix, paste0(folder_path, data_path, paste0(date_path, "_p_value_matrix.csv")), row.names = TRUE)
 write.csv(position_vector, paste0(folder_path, data_path, paste0(date_path, "_position_vector.csv")))
 
-# p_value_matrix = read.csv(paste0(folder_path, data_path, paste0(date_path, "_p_value_matrix.csv")), row.names=1)
-# p_value_vector = read.csv(paste0(folder_path, data_path, paste0(date_path, "_p_value_vector.csv")), row.names=1)
-# position_vector = read.csv(paste0(folder_path, data_path,paste0(date_path, "_position_vector.csv")), row.names=1)
+p_value_matrix = read.csv(paste0(folder_path, data_path, paste0(date_path, "_p_value_matrix.csv")), row.names=1)
+p_value_vector = read.csv(paste0(folder_path, data_path, paste0(date_path, "_p_value_vector.csv")), row.names=1)
+position_vector = read.csv(paste0(folder_path, data_path,paste0(date_path, "_position_vector.csv")), row.names=1)
+
 
 
 # randomly choose the pair stocks that give p_value 0.01
 num = c()
 for (i in 1:dim(p_value_matrix)[2]){
   num = c(num, sum(p_value_matrix[i,]==0.01))}
-num # identify those have few 0.01 p_value with other stocks
+# identify those have few 0.01 p_value with other stocks since stock_symbol with many p_values 0.01 may lead the stock market or have a large effect on other stocks and can be cointegrated with many other stocks
+num 
 
 
+# make stocks into pairs
 pair_stocks = c()
-
 while(dim(p_value_matrix)[1] > 1){
   
   positive_p_values = p_value_matrix[p_value_matrix>0]
@@ -98,14 +102,13 @@ p_value_matrix = read.csv(paste0(folder_path, data_path, paste0(date_path, "_p_v
 
 p_values = c()
 for (i in 1:dim(pair_stocks)[1]){
-  p_values = c(p_values, p_value_matrix[pair_stocks[i,1], pair_stocks[i,2]])
-}
+  p_values = c(p_values, p_value_matrix[pair_stocks[i,1], pair_stocks[i,2]])}
 pair_stocks_values = cbind(pair_stocks, p_values)
 
 write.csv(pair_stocks_values, paste0(folder_path, data_path, paste0(date_path, "_pair_stocks_values.csv")), row.names = TRUE)
-# pair_stocks_values = read.csv(paste0(folder_path, data_path, paste0(date_path, "_pair_stocks_values.csv")), row.names=1)
+pair_stocks_values = read.csv(paste0(folder_path, data_path, paste0(date_path, "_pair_stocks_values.csv")), row.names=1)
 
-# pair_stocks = pair_stocks_values[,1:2]
+pair_stocks = pair_stocks_values[,1:2]
 
 i = 1
 i_vec = c()
@@ -125,14 +128,48 @@ while (i <= dim(pair_stocks)[1]){
 }
 colnames(real_pair_prices) = unlist(t(pair_stocks))
 row.names(real_pair_prices) = dates
+
+
+
+
+# test
+test_that("pair prices are correct",{
+  expect_equal(real_pair_prices$DLR, real_stock_prices$DLR)
+  expect_equal(real_pair_prices$AAPL, real_stock_prices$AAPL)
+  expect_equal(real_pair_prices$NSC, real_stock_prices$NSC)
+})
+# export
 write.csv(real_pair_prices, 
           paste0(folder_path, data_path, 
-                 paste(date_path, "real_pair_prices.csv", sep='_')), 
+                 paste0(date_path, "_pair_prices.csv")), 
           row.names = TRUE)
+
+
+
 
 real_pair_returns = data.frame(sapply(1:dim(real_pair_prices)[2], function(i){
   100 * (log(real_pair_prices[,i][-1]) - log(real_pair_prices[,i][-dim(real_pair_prices)[1]]))}))
+colnames(real_pair_returns) = unlist(t(pair_stocks))
+# test
+real_stock_returns = read.csv(paste0(folder_path, data_path, 
+                                    paste0(date_path, '_stock_returns.csv')), 
+                             row.names=1)
+test_that("pair returns are correct",{
+  expect_equal(real_pair_returns$DLR, real_stock_returns$DLR)
+  expect_equal(real_pair_returns$AAPL, real_stock_returns$AAPL)
+  expect_equal(real_pair_returns$NSC, real_stock_returns$NSC)
+})
+# export
+write.csv(real_pair_returns, 
+          paste0(folder_path, data_path, 
+                 paste0(date_path, "_pair_returns.csv")), 
+                 row.names = TRUE)
 
-write.csv(real_pair_returns, paste0(folder_path, data_path, "real_pair_returns.csv"), row.names = TRUE)
-write.csv(i_vec, paste0(folder_path, data_path, "i_vec.csv"), row.names = TRUE)
+
+
+
+# export
+write.csv(i_vec, 
+          paste0(folder_path, data_path, 
+                 paste0(date_path, "_i_vec.csv")), row.names = TRUE)
 

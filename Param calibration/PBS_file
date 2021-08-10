@@ -1,4 +1,0 @@
-#!/bin/bash
-#PBS -N python_job
-#PBS -m bea
-#PBS -q standard
