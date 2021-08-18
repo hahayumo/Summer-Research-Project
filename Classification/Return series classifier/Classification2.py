@@ -209,8 +209,15 @@ def create_train_test_data(real_data, simulated_data, proportion):
     return x_train, y_train, x_test, y_test
 
 
-real_statistics = create_statistics(label="real", rolling_window=20, return_csv_location="/Users/changmao/Desktop/real_pair_returns.csv", price_csv_location="~/Desktop/real_pair_prices.csv")
-simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/simulated_pair_returns.csv", price_csv_location="~/Desktop/simulated_pair_prices.csv")
+real_statistics = create_statistics(label="real", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/sp500_20180101_20181231_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/sp500_20180101_20181231_pair_prices.csv")
+
+#simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou4/n_sim_ou_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou4/n_sim_ou_pair_prices.csv")
+
+#simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou8/n_sim_ou_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou8/n_sim_ou_pair_prices.csv")
+
+simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou12/n_sim_jumpou_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou12/n_sim_jumpou_pair_prices.csv")
+
+
 X_train, y_train, X_test, y_test = create_train_test_data(real_statistics, simulated_statistics, 0.75)
 
 
