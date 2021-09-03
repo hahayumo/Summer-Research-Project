@@ -1,0 +1,16 @@
+if (sqreturn_autocorrelation_ts1_lag3 <= 0.087) and (sqreturn_autocorrelation_ts2_lag2 <= 0.116) and (sqreturn_correlation_ts1_lag_2 <= 0.149) then class: real (proba: 93.97%) | based on 116 samples
+
+if (sqreturn_autocorrelation_ts1_lag3 > 0.087) and (return_correlation_ts1_lag_0 > 0.384) and (return_mean2 > -0.052) then class: simulated (proba: 98.94%) | based on 94 samples
+
+if (sqreturn_autocorrelation_ts1_lag3 <= 0.087) and (sqreturn_autocorrelation_ts2_lag2 > 0.116) and (sqreturn_autocorrelation_ts2_lag3 > 0.075) then class: simulated (proba: 88.24%) | based on 17 samples
+
+if (sqreturn_autocorrelation_ts1_lag3 > 0.087) and (return_correlation_ts1_lag_0 <= 0.384) and (sqreturn_autocorrelation_ts1_lag3 <= 0.266) then class: real (proba: 100.0%) | based on 12 samples
+
+if (sqreturn_autocorrelation_ts1_lag3 <= 0.087) and (sqreturn_autocorrelation_ts2_lag2 > 0.116) and (sqreturn_autocorrelation_ts2_lag3 <= 0.075) then class: real (proba: 75.0%) | based on 12 samples
+
+if (sqreturn_autocorrelation_ts1_lag3 > 0.087) and (return_correlation_ts1_lag_0 > 0.384) and (return_mean2 <= -0.052) then class: real (proba: 66.67%) | based on 6 samples
+
+if (sqreturn_autocorrelation_ts1_lag3 <= 0.087) and (sqreturn_autocorrelation_ts2_lag2 <= 0.116) and (sqreturn_correlation_ts1_lag_2 > 0.149) then class: simulated (proba: 100.0%) | based on 2 samples
+
+if (sqreturn_autocorrelation_ts1_lag3 > 0.087) and (return_correlation_ts1_lag_0 <= 0.384) and (sqreturn_autocorrelation_ts1_lag3 > 0.266) then class: simulated (proba: 100.0%) | based on 1 samples
+

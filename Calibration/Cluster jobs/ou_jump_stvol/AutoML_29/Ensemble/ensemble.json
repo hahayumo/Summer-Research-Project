@@ -1,0 +1,25 @@
+{
+    "name": "Ensemble",
+    "ml_task": "binary_classification",
+    "optimize_metric": "accuracy",
+    "selected_models": [
+        {
+            "model": "1_Baseline",
+            "repeat": 1.0
+        },
+        {
+            "model": "4_Default_Xgboost",
+            "repeat": 1.0
+        },
+        {
+            "model": "5_Default_NeuralNetwork",
+            "repeat": 1.0
+        }
+    ],
+    "predictions_fname": "Ensemble/predictions_ensemble.csv",
+    "metric_name": "accuracy",
+    "final_loss": -1.0,
+    "train_time": 0.3215973377227783,
+    "is_stacked": false,
+    "threshold": 0.42324201960164315
+}

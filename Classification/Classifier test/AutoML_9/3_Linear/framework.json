@@ -1,0 +1,283 @@
+{
+    "uid": "48b16a87-7f20-4b9b-a8e8-55e0582d5759",
+    "name": "3_Linear",
+    "preprocessing": [
+        {
+            "scale": [
+                {
+                    "scale": [
+                        43.72411105386186,
+                        91.11056999764038,
+                        8.751437148676393,
+                        20.245464042854667,
+                        0.65549041933042,
+                        0.6705094066540693,
+                        0.00730408453994531,
+                        0.014141788224289837,
+                        0.020668484892547,
+                        0.008660811003520773,
+                        0.016472608115488292,
+                        0.023832054485724518,
+                        0.007325163775080648,
+                        0.014146924744453674,
+                        0.02063315344386343,
+                        0.008608284834792895,
+                        0.016429498583939262,
+                        0.023793470196483903
+                    ],
+                    "mean": [
+                        48.749769443676925,
+                        51.44502537513077,
+                        7.500465390517832,
+                        8.415111275875415,
+                        -0.5765854955552909,
+                        -0.5990756412871708,
+                        0.9902384284079913,
+                        0.9809815923899095,
+                        0.9720891075905632,
+                        0.9901755650203761,
+                        0.980855917919526,
+                        0.9718558386311021,
+                        0.989944613716859,
+                        0.9804168399114368,
+                        0.9713041594241616,
+                        0.9898783414409174,
+                        0.980269763719081,
+                        0.9709990821787056
+                    ],
+                    "var": [
+                        1911.7978874504452,
+                        8301.135965294929,
+                        76.5876521672332,
+                        409.8788143105212,
+                        0.42966768983396986,
+                        0.44958286441159206,
+                        5.334965096666808e-05,
+                        0.00019999017418066272,
+                        0.0004271862677534436,
+                        7.500964723870649e-05,
+                        0.0002713468181264507,
+                        0.000567966821010542,
+                        5.3658024331753775e-05,
+                        0.00020013547972523566,
+                        0.0004257270210380134,
+                        7.410256779692534e-05,
+                        0.00026992842371966223,
+                        0.0005661292239909677
+                    ],
+                    "n_samples_seen": 260,
+                    "n_features_in": 18,
+                    "columns": [
+                        "return_mean1",
+                        "return_mean2",
+                        "return_sd1",
+                        "return_sd2",
+                        "return_kurtosis1",
+                        "return_kurtosis2",
+                        "return_autocorrelation_1_lag1",
+                        "return_autocorrelation_1_lag2",
+                        "return_autocorrelation_1_lag3",
+                        "return_autocorrelation_2_lag1",
+                        "return_autocorrelation_2_lag2",
+                        "return_autocorrelation_2_lag3",
+                        "sqreturn_autocorrelation_ts1_lag1",
+                        "sqreturn_autocorrelation_ts1_lag2",
+                        "sqreturn_autocorrelation_ts1_lag3",
+                        "sqreturn_autocorrelation_ts2_lag1",
+                        "sqreturn_autocorrelation_ts2_lag2",
+                        "sqreturn_autocorrelation_ts2_lag3"
+                    ],
+                    "scale_method": "scale_normal"
+                }
+            ],
+            "categorical_y": {
+                "real": 0,
+                "simulated": 1
+            },
+            "ml_task": "binary_classification",
+            "params": {
+                "columns_preprocessing": {
+                    "return_mean1": [
+                        "scale_normal"
+                    ],
+                    "return_mean2": [
+                        "scale_normal"
+                    ],
+                    "return_sd1": [
+                        "scale_normal"
+                    ],
+                    "return_sd2": [
+                        "scale_normal"
+                    ],
+                    "return_kurtosis1": [
+                        "scale_normal"
+                    ],
+                    "return_kurtosis2": [
+                        "scale_normal"
+                    ],
+                    "return_autocorrelation_1_lag1": [
+                        "scale_normal"
+                    ],
+                    "return_autocorrelation_1_lag2": [
+                        "scale_normal"
+                    ],
+                    "return_autocorrelation_1_lag3": [
+                        "scale_normal"
+                    ],
+                    "return_autocorrelation_2_lag1": [
+                        "scale_normal"
+                    ],
+                    "return_autocorrelation_2_lag2": [
+                        "scale_normal"
+                    ],
+                    "return_autocorrelation_2_lag3": [
+                        "scale_normal"
+                    ],
+                    "sqreturn_autocorrelation_ts1_lag1": [
+                        "scale_normal"
+                    ],
+                    "sqreturn_autocorrelation_ts1_lag2": [
+                        "scale_normal"
+                    ],
+                    "sqreturn_autocorrelation_ts1_lag3": [
+                        "scale_normal"
+                    ],
+                    "sqreturn_autocorrelation_ts2_lag1": [
+                        "scale_normal"
+                    ],
+                    "sqreturn_autocorrelation_ts2_lag2": [
+                        "scale_normal"
+                    ],
+                    "sqreturn_autocorrelation_ts2_lag3": [
+                        "scale_normal"
+                    ]
+                },
+                "target_preprocessing": [
+                    "na_exclude",
+                    "categorical_to_int"
+                ],
+                "ml_task": "binary_classification"
+            }
+        }
+    ],
+    "learners": [
+        {
+            "library_version": "0.24.2",
+            "algorithm_name": "Logistic Regression",
+            "algorithm_short_name": "Linear",
+            "uid": "e9b8f269-f02e-4a7e-afdf-8464f0408faa",
+            "params": {
+                "model_type": "Linear",
+                "ml_task": "binary_classification",
+                "n_jobs": -1,
+                "seed": 1235,
+                "explain_level": 2
+            },
+            "name": "learner_fold_0"
+        }
+    ],
+    "params": {
+        "additional": {
+            "max_steps": 1,
+            "max_rows_limit": null,
+            "max_cols_limit": null
+        },
+        "preprocessing": {
+            "columns_preprocessing": {
+                "return_mean1": [
+                    "scale_normal"
+                ],
+                "return_mean2": [
+                    "scale_normal"
+                ],
+                "return_sd1": [
+                    "scale_normal"
+                ],
+                "return_sd2": [
+                    "scale_normal"
+                ],
+                "return_kurtosis1": [
+                    "scale_normal"
+                ],
+                "return_kurtosis2": [
+                    "scale_normal"
+                ],
+                "return_autocorrelation_1_lag1": [
+                    "scale_normal"
+                ],
+                "return_autocorrelation_1_lag2": [
+                    "scale_normal"
+                ],
+                "return_autocorrelation_1_lag3": [
+                    "scale_normal"
+                ],
+                "return_autocorrelation_2_lag1": [
+                    "scale_normal"
+                ],
+                "return_autocorrelation_2_lag2": [
+                    "scale_normal"
+                ],
+                "return_autocorrelation_2_lag3": [
+                    "scale_normal"
+                ],
+                "sqreturn_autocorrelation_ts1_lag1": [
+                    "scale_normal"
+                ],
+                "sqreturn_autocorrelation_ts1_lag2": [
+                    "scale_normal"
+                ],
+                "sqreturn_autocorrelation_ts1_lag3": [
+                    "scale_normal"
+                ],
+                "sqreturn_autocorrelation_ts2_lag1": [
+                    "scale_normal"
+                ],
+                "sqreturn_autocorrelation_ts2_lag2": [
+                    "scale_normal"
+                ],
+                "sqreturn_autocorrelation_ts2_lag3": [
+                    "scale_normal"
+                ]
+            },
+            "target_preprocessing": [
+                "na_exclude",
+                "categorical_to_int"
+            ],
+            "ml_task": "binary_classification"
+        },
+        "validation_strategy": {
+            "validation_type": "split",
+            "train_ratio": 0.75,
+            "shuffle": true,
+            "stratify": true,
+            "X_path": "AutoML_9/X.data",
+            "y_path": "AutoML_9/y.data",
+            "results_path": "AutoML_9"
+        },
+        "learner": {
+            "model_type": "Linear",
+            "ml_task": "binary_classification",
+            "n_jobs": -1,
+            "seed": 1235,
+            "explain_level": 2
+        },
+        "automl_random_state": 1234,
+        "ml_task": "binary_classification",
+        "explain_level": 2,
+        "name": "3_Linear",
+        "status": "initialized",
+        "final_loss": null,
+        "train_time": null,
+        "data_type": "original",
+        "max_time_for_learner": 360.0
+    },
+    "saved": [
+        "3_Linear/learner_fold_0.linear"
+    ],
+    "predictions_fname": "3_Linear/predictions_validation.csv",
+    "metric_name": "accuracy",
+    "final_loss": -0.4942528735632184,
+    "train_time": 10.413510084152222,
+    "is_stacked": false,
+    "threshold": 0.5556655966518803
+}

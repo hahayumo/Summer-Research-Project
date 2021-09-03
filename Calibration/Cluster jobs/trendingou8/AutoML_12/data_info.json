@@ -1,0 +1,69 @@
+{
+    "columns": [
+        "return_mean1",
+        "return_mean2",
+        "return_sd1",
+        "return_sd2",
+        "return_skew1",
+        "return_skew2",
+        "return_kurtosis1",
+        "return_kurtosis2",
+        "return_autocorrelation_lag1_1",
+        "return_autocorrelation_lag1_2",
+        "return_autocorrelation_lag1_rolling_sd1",
+        "return_autocorrelation_lag1_rolling_sd2",
+        "return_correlation_ts1_lag_0",
+        "return_correlation_ts1_lag_1",
+        "return_correlation_ts1_lag_2",
+        "return_correlation_ts1_lag_3",
+        "return_correlation_ts2_lag_1",
+        "return_correlation_ts2_lag_2",
+        "return_correlation_ts2_lag_3",
+        "price2_granger_cause_price1",
+        "price1_granger_cause_price2"
+    ],
+    "rows": 347,
+    "cols": 21,
+    "target_is_numeric": false,
+    "columns_info": {
+        "return_mean1": [],
+        "return_mean2": [],
+        "return_sd1": [
+            "scale"
+        ],
+        "return_sd2": [
+            "scale"
+        ],
+        "return_skew1": [],
+        "return_skew2": [],
+        "return_kurtosis1": [
+            "scale"
+        ],
+        "return_kurtosis2": [
+            "scale"
+        ],
+        "return_autocorrelation_lag1_1": [],
+        "return_autocorrelation_lag1_2": [],
+        "return_autocorrelation_lag1_rolling_sd1": [
+            "scale"
+        ],
+        "return_autocorrelation_lag1_rolling_sd2": [
+            "scale"
+        ],
+        "return_correlation_ts1_lag_0": [],
+        "return_correlation_ts1_lag_1": [],
+        "return_correlation_ts1_lag_2": [],
+        "return_correlation_ts1_lag_3": [],
+        "return_correlation_ts2_lag_1": [],
+        "return_correlation_ts2_lag_2": [],
+        "return_correlation_ts2_lag_3": [],
+        "price2_granger_cause_price1": [],
+        "price1_granger_cause_price2": []
+    },
+    "target_info": [
+        "convert_0_1"
+    ],
+    "n_features": 21,
+    "is_sample_weighted": false,
+    "n_classes": 2
+}

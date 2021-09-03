@@ -1,0 +1,148 @@
+{
+    "uid": "6ce75e68-bd7c-42f6-a9bd-03f39cf7b5ca",
+    "name": "5_Default_NeuralNetwork",
+    "preprocessing": [
+        {
+            "scale": [
+                {
+                    "scale": [
+                        0.8401810461690934,
+                        0.7244683882516674,
+                        6.329241121994664,
+                        11.664507666747754
+                    ],
+                    "mean": [
+                        1.940745429627085,
+                        1.8249254835544912,
+                        3.2991553123488186,
+                        4.245551630558054
+                    ],
+                    "var": [
+                        0.7059041903417923,
+                        0.5248544455759687,
+                        40.05929318034827,
+                        136.06073910761714
+                    ],
+                    "n_samples_seen": 260,
+                    "n_features_in": 4,
+                    "columns": [
+                        "sd1",
+                        "sd2",
+                        "kurtosis1",
+                        "kurtosis2"
+                    ],
+                    "scale_method": "scale_normal"
+                }
+            ],
+            "categorical_y": {
+                "real": 0,
+                "simulated": 1
+            },
+            "ml_task": "binary_classification",
+            "params": {
+                "columns_preprocessing": {
+                    "sd1": [
+                        "scale_normal"
+                    ],
+                    "sd2": [
+                        "scale_normal"
+                    ],
+                    "kurtosis1": [
+                        "scale_normal"
+                    ],
+                    "kurtosis2": [
+                        "scale_normal"
+                    ]
+                },
+                "target_preprocessing": [
+                    "na_exclude",
+                    "categorical_to_int"
+                ],
+                "ml_task": "binary_classification"
+            }
+        }
+    ],
+    "learners": [
+        {
+            "library_version": "0.24.2",
+            "algorithm_name": "Neural Network",
+            "algorithm_short_name": "Neural Network",
+            "uid": "80bb6b2d-9584-44d9-b908-b8938355b021",
+            "params": {
+                "model_type": "Neural Network",
+                "ml_task": "binary_classification",
+                "n_jobs": -1,
+                "dense_1_size": 32,
+                "dense_2_size": 16,
+                "learning_rate": 0.05,
+                "seed": 5,
+                "explain_level": 2
+            },
+            "name": "learner_fold_0"
+        }
+    ],
+    "params": {
+        "additional": {
+            "max_rows_limit": null,
+            "max_cols_limit": null
+        },
+        "preprocessing": {
+            "columns_preprocessing": {
+                "sd1": [
+                    "scale_normal"
+                ],
+                "sd2": [
+                    "scale_normal"
+                ],
+                "kurtosis1": [
+                    "scale_normal"
+                ],
+                "kurtosis2": [
+                    "scale_normal"
+                ]
+            },
+            "target_preprocessing": [
+                "na_exclude",
+                "categorical_to_int"
+            ],
+            "ml_task": "binary_classification"
+        },
+        "validation_strategy": {
+            "validation_type": "split",
+            "train_ratio": 0.75,
+            "shuffle": true,
+            "stratify": true,
+            "X_path": "AutoML_27/X.data",
+            "y_path": "AutoML_27/y.data",
+            "results_path": "AutoML_27"
+        },
+        "learner": {
+            "model_type": "Neural Network",
+            "ml_task": "binary_classification",
+            "n_jobs": -1,
+            "dense_1_size": 32,
+            "dense_2_size": 16,
+            "learning_rate": 0.05,
+            "seed": 5,
+            "explain_level": 2
+        },
+        "automl_random_state": 1234,
+        "ml_task": "binary_classification",
+        "explain_level": 2,
+        "name": "5_Default_NeuralNetwork",
+        "status": "initialized",
+        "final_loss": null,
+        "train_time": null,
+        "data_type": "original",
+        "max_time_for_learner": 360.0
+    },
+    "saved": [
+        "5_Default_NeuralNetwork/learner_fold_0.neural_network"
+    ],
+    "predictions_fname": "5_Default_NeuralNetwork/predictions_validation.csv",
+    "metric_name": "accuracy",
+    "final_loss": -1.0,
+    "train_time": 3.3691959381103516,
+    "is_stacked": false,
+    "threshold": 0.550000635731257
+}

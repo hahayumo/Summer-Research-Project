@@ -14,6 +14,10 @@ import pickle
 from statsmodels.stats.stattools import durbin_watson
 import statsmodels.tsa.stattools as ts
 from statsmodels.tsa.stattools import grangercausalitytests
+from sklearn.model_selection import train_test_split
+from supervised.automl import AutoML
+from sklearn.metrics import accuracy_score
+from supervised.preprocessing.eda import EDA
 
 def cross_corr_coef(lag_time_series, lead_time_series, lag):
     # calculate the cross correlation between two time series
@@ -181,7 +185,7 @@ def create_statistics(label, rolling_window, return_csv_location, price_csv_loca
 
 def create_train_test_data(real_data, simulated_data, proportion):
 
-    rs1 = RandomState(123)
+    rs1 = RandomState(1234)
     num_total_rows = len(real_data)
     num_train_rows = int(num_total_rows * proportion)  # 75% of the real_data
 
@@ -209,28 +213,91 @@ def create_train_test_data(real_data, simulated_data, proportion):
     return x_train, y_train, x_test, y_test
 
 
-real_statistics = create_statistics(label="real", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/sp500_20180101_20181231_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/sp500_20180101_20181231_pair_prices.csv")
+real_statistics = create_statistics(label="real", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/sp500_20190101_20191231/sp500_20190101_20191231_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/sp500_20190101_20191231/sp500_20190101_20191231_pair_prices.csv")
 
 #simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou4/n_sim_ou_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou4/n_sim_ou_pair_prices.csv")
 
 #simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou8/n_sim_ou_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou8/n_sim_ou_pair_prices.csv")
 
-simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou12/n_sim_jumpou_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou12/n_sim_jumpou_pair_prices.csv")
+#simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou_jump12/n_sim_jumpou_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ou_jump12/n_sim_jumpou_pair_prices.csv")
+
+#simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ss22/n_sim_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/ss22/n_sim_pair_prices.csv")
+
+#simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/stvol1998/n_sim_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Calibration/Cluster jobs/stvol1998/n_sim_pair_prices.csv")
+
+simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/sp500_20180101_20181231/sp500_20180101_20181231_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/sp500_20180101_20181231/sp500_20180101_20181231_pair_prices.csv")
+
+#simulated_statistics = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/sp500_20190101_20191231/sp500_20190101_20191231_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/sp500_20190101_20191231/sp500_20190101_20191231_pair_prices.csv")
+
+# X_train, y_train, X_test, y_test = create_train_test_data(real_statistics, simulated_statistics, 0.75)
 
 
-X_train, y_train, X_test, y_test = create_train_test_data(real_statistics, simulated_statistics, 0.75)
+#simulated_statistics = simulated_statistics.iloc[124:248, :]
+#real_statistics = real_statistics.iloc[0:124, :]
 
 
-random.seed(123)
-from supervised.automl import AutoML
-from sklearn.metrics import accuracy_score
-from supervised.preprocessing.eda import EDA
+
+#real_2019 = real_statistics
+#real_2018 = create_statistics(label="real", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/sp500_20180101_20181231/sp500_20180101_20181231_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/sp500_20180101_20181231/sp500_20180101_20181231_pair_prices.csv")
+#sim_2018 = simulated_statistics
+#sim_2019 = create_statistics(label="simulated", rolling_window=20, return_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/sp500_20190101_20191231/sp500_20190101_20191231_pair_returns.csv", price_csv_location="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Data/sp500_20190101_20191231/sp500_20190101_20191231_pair_prices.csv")
+
+#rows = np.random.randint(low=0, high=248, size=(124,))
+#lrows = range(248)
+
+#real_statistics = pd.concat([real_2018.iloc[::2, :], real_2019.iloc[1::2, :]])
+#simulated_statistics = pd.concat([sim_2018.iloc[1::2, :], sim_2019.iloc[::2, :]])
+
+
+
+
+
+
+dataset = pd.concat([real_statistics, simulated_statistics])
+X = dataset.iloc[:, 0:27]
+y = dataset.iloc[:, 27]
+
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3,random_state=123)
 automl = AutoML(eval_metric='accuracy')
 automl.fit(X_train, y_train)
 predictions = automl.predict(X_test)
-print(f"Accuracy of predictions:  {accuracy_score(y_test,predictions):.3f}")
+accuracy_result = accuracy_score(y_test, predictions)
+print(f"Accuracy of predictions:  {accuracy_result:.3f}")
 
-# EDA.extensive_eda(X_train, y_train, save_path="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Return series classifier/AutoML...")
+
+
+
+
+
+
+np.random.seed(9868)
+num_iter = 10
+random_seeds = np.random.randint(low=0, high=980608, size=(num_iter,))
+results = []
+
+for iter in range(num_iter):
+
+    print(num_iter)
+
+    random_seed = int(random_seeds[iter])
+    print(random_seed)
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=random_seed)
+    automl = AutoML(eval_metric='accuracy')
+    automl.fit(X_train, y_train)
+    predictions = automl.predict(X_test)
+    accuracy_result = accuracy_score(y_test, predictions)
+    results.append(accuracy_result)
+    print(f"Accuracy of predictions:  {accuracy_result:.3f}")
+
+accuracy_average = np.mean(results)
+accuracy_std = np.std(results)
+print(results)
+print(accuracy_average)
+print(accuracy_std)
+#EDA.extensive_eda(X_train, y_train, save_path="/Users/changmao/Desktop/OneDrive - Imperial College London/InferStat - MSc Summer Project/GitHub/Summer-Research-Project/Classification/Return series classifier/AutoML_EDA")
 # globals().clear()
 ######################################################################
 

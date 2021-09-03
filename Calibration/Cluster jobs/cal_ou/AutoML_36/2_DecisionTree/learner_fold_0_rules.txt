@@ -1,0 +1,6 @@
+if (return_autocorrelation_2_lag1 > 0.172) then class: simulated (proba: 100.0%) | based on 130 samples
+
+if (return_autocorrelation_2_lag1 <= 0.172) and (kurtosis1 > -0.059) then class: real (proba: 100.0%) | based on 129 samples
+
+if (return_autocorrelation_2_lag1 <= 0.172) and (kurtosis1 <= -0.059) then class: simulated (proba: 100.0%) | based on 1 samples
+

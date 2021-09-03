@@ -1,0 +1,163 @@
+{
+    "uid": "70d24e87-2664-4500-803b-8713e9783c2b",
+    "name": "3_Linear",
+    "preprocessing": [
+        {
+            "scale": [
+                {
+                    "scale": [
+                        0.40287699979745856,
+                        0.395248843051958,
+                        5.533959845017116,
+                        7.038325430115307,
+                        0.022157432734951105,
+                        0.019522491546411266
+                    ],
+                    "mean": [
+                        1.5286984722386023,
+                        1.724797562954505,
+                        2.438318315477484,
+                        4.160168088245144,
+                        0.9450784909689445,
+                        0.9481446199890032
+                    ],
+                    "var": [
+                        0.16230987696580143,
+                        0.15622164793391133,
+                        30.624711566261865,
+                        49.53802486020782,
+                        0.0004909518254038827,
+                        0.0003811276761796994
+                    ],
+                    "n_samples_seen": 260,
+                    "n_features_in": 6,
+                    "columns": [
+                        "return_sd1",
+                        "return_sd2",
+                        "return_kurtosis1",
+                        "return_kurtosis2",
+                        "return_autocorrelation_lag1_rolling_sd1",
+                        "return_autocorrelation_lag1_rolling_sd2"
+                    ],
+                    "scale_method": "scale_normal"
+                }
+            ],
+            "categorical_y": {
+                "real": 0,
+                "simulated": 1
+            },
+            "ml_task": "binary_classification",
+            "params": {
+                "columns_preprocessing": {
+                    "return_sd1": [
+                        "scale_normal"
+                    ],
+                    "return_sd2": [
+                        "scale_normal"
+                    ],
+                    "return_kurtosis1": [
+                        "scale_normal"
+                    ],
+                    "return_kurtosis2": [
+                        "scale_normal"
+                    ],
+                    "return_autocorrelation_lag1_rolling_sd1": [
+                        "scale_normal"
+                    ],
+                    "return_autocorrelation_lag1_rolling_sd2": [
+                        "scale_normal"
+                    ]
+                },
+                "target_preprocessing": [
+                    "na_exclude",
+                    "categorical_to_int"
+                ],
+                "ml_task": "binary_classification"
+            }
+        }
+    ],
+    "learners": [
+        {
+            "library_version": "0.24.2",
+            "algorithm_name": "Logistic Regression",
+            "algorithm_short_name": "Linear",
+            "uid": "bc9390a9-ab6f-4d5e-a7c9-12cdbfd04db5",
+            "params": {
+                "model_type": "Linear",
+                "ml_task": "binary_classification",
+                "n_jobs": -1,
+                "seed": 1235,
+                "explain_level": 2
+            },
+            "name": "learner_fold_0"
+        }
+    ],
+    "params": {
+        "additional": {
+            "max_steps": 1,
+            "max_rows_limit": null,
+            "max_cols_limit": null
+        },
+        "preprocessing": {
+            "columns_preprocessing": {
+                "return_sd1": [
+                    "scale_normal"
+                ],
+                "return_sd2": [
+                    "scale_normal"
+                ],
+                "return_kurtosis1": [
+                    "scale_normal"
+                ],
+                "return_kurtosis2": [
+                    "scale_normal"
+                ],
+                "return_autocorrelation_lag1_rolling_sd1": [
+                    "scale_normal"
+                ],
+                "return_autocorrelation_lag1_rolling_sd2": [
+                    "scale_normal"
+                ]
+            },
+            "target_preprocessing": [
+                "na_exclude",
+                "categorical_to_int"
+            ],
+            "ml_task": "binary_classification"
+        },
+        "validation_strategy": {
+            "validation_type": "split",
+            "train_ratio": 0.75,
+            "shuffle": true,
+            "stratify": true,
+            "X_path": "AutoML_4/X.data",
+            "y_path": "AutoML_4/y.data",
+            "results_path": "AutoML_4"
+        },
+        "learner": {
+            "model_type": "Linear",
+            "ml_task": "binary_classification",
+            "n_jobs": -1,
+            "seed": 1235,
+            "explain_level": 2
+        },
+        "automl_random_state": 1234,
+        "ml_task": "binary_classification",
+        "explain_level": 2,
+        "name": "3_Linear",
+        "status": "initialized",
+        "final_loss": null,
+        "train_time": null,
+        "data_type": "original",
+        "max_time_for_learner": 360.0
+    },
+    "saved": [
+        "3_Linear/learner_fold_0.linear"
+    ],
+    "predictions_fname": "3_Linear/predictions_validation.csv",
+    "metric_name": "accuracy",
+    "final_loss": -1.0,
+    "train_time": 4.125568151473999,
+    "is_stacked": false,
+    "threshold": 0.5201810900120615
+}

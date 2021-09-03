@@ -1,0 +1,26 @@
+# AutoML Leaderboard
+
+| Best model   | name                                                         | model_type     | metric_type   |   metric_value |   train_time |
+|:-------------|:-------------------------------------------------------------|:---------------|:--------------|---------------:|-------------:|
+|              | [1_Baseline](1_Baseline/README.md)                           | Baseline       | accuracy      |       0.505747 |         3.48 |
+|              | [2_DecisionTree](2_DecisionTree/README.md)                   | Decision Tree  | accuracy      |       0.494253 |         6.65 |
+|              | [3_Linear](3_Linear/README.md)                               | Linear         | accuracy      |       0.517241 |         6.65 |
+|              | [4_Default_Xgboost](4_Default_Xgboost/README.md)             | Xgboost        | accuracy      |       0.563218 |         6.43 |
+|              | [5_Default_NeuralNetwork](5_Default_NeuralNetwork/README.md) | Neural Network | accuracy      |       0.586207 |         5.39 |
+|              | [6_Default_RandomForest](6_Default_RandomForest/README.md)   | Random Forest  | accuracy      |       0.54023  |         8.71 |
+| **the best** | [Ensemble](Ensemble/README.md)                               | Ensemble       | accuracy      |       0.609195 |         0.34 |
+
+### AutoML Performance
+![AutoML Performance](ldb_performance.png)
+
+### AutoML Performance Boxplot
+![AutoML Performance Boxplot](ldb_performance_boxplot.png)
+
+### Features Importance
+![features importance across models](features_heatmap.png)
+
+
+
+### Spearman Correlation of Models
+![models spearman correlation](correlation_heatmap.png)
+

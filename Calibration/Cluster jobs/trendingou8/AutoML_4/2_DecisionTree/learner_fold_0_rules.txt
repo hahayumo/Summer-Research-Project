@@ -1,0 +1,4 @@
+if (return_correlation_ts1_lag_0 > 0.942) then class: simulated (proba: 100.0%) | based on 132 samples
+
+if (return_correlation_ts1_lag_0 <= 0.942) then class: real (proba: 100.0%) | based on 128 samples
+

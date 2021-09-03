@@ -1,0 +1,21 @@
+{
+    "name": "Ensemble",
+    "ml_task": "binary_classification",
+    "optimize_metric": "accuracy",
+    "selected_models": [
+        {
+            "model": "5_Default_NeuralNetwork",
+            "repeat": 1.0
+        },
+        {
+            "model": "6_Default_RandomForest",
+            "repeat": 1.0
+        }
+    ],
+    "predictions_fname": "Ensemble/predictions_ensemble.csv",
+    "metric_name": "accuracy",
+    "final_loss": -1.0,
+    "train_time": 0.3391580581665039,
+    "is_stacked": false,
+    "threshold": 0.6139761764067783
+}

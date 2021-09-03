@@ -1,0 +1,5 @@
+name,model_type,metric_type,metric_value,train_time
+1_Baseline,Baseline,accuracy,0.5172413793103449,1.69
+2_DecisionTree,Decision Tree,accuracy,1.0,7.46
+3_Linear,Linear,accuracy,0.9195402298850575,4.99
+4_Default_Xgboost,Xgboost,accuracy,1.0,6.01

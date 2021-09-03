@@ -1,0 +1,21 @@
+{
+    "name": "Ensemble",
+    "ml_task": "binary_classification",
+    "optimize_metric": "accuracy",
+    "selected_models": [
+        {
+            "model": "3_Linear",
+            "repeat": 1.0
+        },
+        {
+            "model": "4_Default_Xgboost",
+            "repeat": 1.0
+        }
+    ],
+    "predictions_fname": "Ensemble/predictions_ensemble.csv",
+    "metric_name": "accuracy",
+    "final_loss": -1.0,
+    "train_time": 0.40108609199523926,
+    "is_stacked": false,
+    "threshold": 0.5150938153737723
+}

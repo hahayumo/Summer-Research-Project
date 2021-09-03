@@ -1,0 +1,148 @@
+# Summary of 3_Linear
+
+[<< Go back](../README.md)
+
+
+## Logistic Regression (Linear)
+- **n_jobs**: -1
+- **explain_level**: 2
+
+## Validation
+ - **validation_type**: split
+ - **train_ratio**: 0.75
+ - **shuffle**: True
+ - **stratify**: True
+
+## Optimized metric
+accuracy
+
+## Training time
+
+4.6 seconds
+
+## Metric details
+|           |    score |     threshold |
+|:----------|---------:|--------------:|
+| logloss   | 0.269853 | nan           |
+| auc       | 0.97037  | nan           |
+| f1        | 0.93617  |   0.536118    |
+| accuracy  | 0.931034 |   0.536118    |
+| precision | 1        |   0.800793    |
+| recall    | 1        |   1.98813e-12 |
+| mcc       | 0.865163 |   0.536118    |
+
+
+## Confusion matrix (at threshold=0.536118)
+|                      |   Predicted as real |   Predicted as simulated |
+|:---------------------|--------------------:|-------------------------:|
+| Labeled as real      |                  37 |                        5 |
+| Labeled as simulated |                   1 |                       44 |
+
+## Learning curves
+![Learning curves](learning_curves.png)
+
+## Coefficients
+| feature                           |   Learner_1 |
+|:----------------------------------|------------:|
+| sqreturn_autocorrelation_ts1_lag3 |  2.35473    |
+| sqreturn_autocorrelation_ts2_lag2 |  2.17114    |
+| sqreturn_autocorrelation_ts2_lag3 |  1.77667    |
+| sqreturn_autocorrelation_ts1_lag2 |  1.66123    |
+| sqreturn_autocorrelation_ts1_lag1 |  1.57222    |
+| sqreturn_autocorrelation_ts2_lag1 |  1.40735    |
+| return_correlation_ts1_lag_0      |  1.27659    |
+| sqreturn_correlation_ts1_lag_0    |  1.27659    |
+| return_mean2                      |  0.908647   |
+| return_mean1                      |  0.765136   |
+| return_autocorrelation_1_lag1     |  0.730313   |
+| return_sd2                        |  0.614925   |
+| return_autocorrelation_1_lag2     |  0.579381   |
+| sqreturn_correlation_ts1_lag_1    |  0.306169   |
+| return_correlation_ts1_lag_1      |  0.306169   |
+| sqreturn_correlation_ts2_lag_2    |  0.167811   |
+| return_correlation_ts2_lag_2      |  0.167811   |
+| return_correlation_ts2_lag_1      |  0.0885408  |
+| sqreturn_correlation_ts2_lag_1    |  0.0885408  |
+| price1_granger_cause_price2       |  0.00566414 |
+| price2_granger_cause_price1       | -0.0128521  |
+| return_correlation_ts1_lag_2      | -0.046618   |
+| sqreturn_correlation_ts1_lag_2    | -0.046618   |
+| return_autocorrelation_1_lag3     | -0.0474812  |
+| return_autocorrelation_2_lag2     | -0.136088   |
+| return_skew1                      | -0.181516   |
+| return_autocorrelation_2_lag1     | -0.18344    |
+| sqreturn_correlation_ts1_lag_3    | -0.184488   |
+| return_correlation_ts1_lag_3      | -0.184488   |
+| return_correlation_ts2_lag_3      | -0.241524   |
+| sqreturn_correlation_ts2_lag_3    | -0.241524   |
+| return_skew2                      | -0.272692   |
+| return_autocorrelation_2_lag3     | -0.687897   |
+| return_sd1                        | -0.727817   |
+| return_kurtosis1                  | -0.858873   |
+| return_kurtosis2                  | -2.62395    |
+| intercept                         | -3.09446    |
+
+
+## Permutation-based Importance
+![Permutation-based Importance](permutation_importance.png)
+## Confusion Matrix
+
+![Confusion Matrix](confusion_matrix.png)
+
+
+## Normalized Confusion Matrix
+
+![Normalized Confusion Matrix](confusion_matrix_normalized.png)
+
+
+## ROC Curve
+
+![ROC Curve](roc_curve.png)
+
+
+## Kolmogorov-Smirnov Statistic
+
+![Kolmogorov-Smirnov Statistic](ks_statistic.png)
+
+
+## Precision-Recall Curve
+
+![Precision-Recall Curve](precision_recall_curve.png)
+
+
+## Calibration Curve
+
+![Calibration Curve](calibration_curve_curve.png)
+
+
+## Cumulative Gains Curve
+
+![Cumulative Gains Curve](cumulative_gains_curve.png)
+
+
+## Lift Curve
+
+![Lift Curve](lift_curve.png)
+
+
+
+## SHAP Importance
+![SHAP Importance](shap_importance.png)
+
+## SHAP Dependence plots
+
+### Dependence (Fold 1)
+![SHAP Dependence from Fold 1](learner_fold_0_shap_dependence.png)
+
+## SHAP Decision plots
+
+### Top-10 Worst decisions for class 0 (Fold 1)
+![SHAP worst decisions class 0 from Fold 1](learner_fold_0_shap_class_0_worst_decisions.png)
+### Top-10 Best decisions for class 0 (Fold 1)
+![SHAP best decisions class 0 from Fold 1](learner_fold_0_shap_class_0_best_decisions.png)
+### Top-10 Worst decisions for class 1 (Fold 1)
+![SHAP worst decisions class 1 from Fold 1](learner_fold_0_shap_class_1_worst_decisions.png)
+### Top-10 Best decisions for class 1 (Fold 1)
+![SHAP best decisions class 1 from Fold 1](learner_fold_0_shap_class_1_best_decisions.png)
+
+[<< Go back](../README.md)

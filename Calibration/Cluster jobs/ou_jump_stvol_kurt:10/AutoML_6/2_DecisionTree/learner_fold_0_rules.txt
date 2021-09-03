@@ -1,0 +1,12 @@
+if (return_kurtosis1 <= 0.692) and (return_sd2 > 1.411) and (return_kurtosis2 <= 1.904) then class: simulated (proba: 100.0%) | based on 132 samples
+
+if (return_kurtosis1 > 0.692) and (return_mean2 > -0.256) then class: real (proba: 100.0%) | based on 123 samples
+
+if (return_kurtosis1 <= 0.692) and (return_sd2 <= 1.411) then class: real (proba: 100.0%) | based on 2 samples
+
+if (return_kurtosis1 > 0.692) and (return_mean2 <= -0.256) and (return_sd2 > 2.301) then class: real (proba: 100.0%) | based on 1 samples
+
+if (return_kurtosis1 > 0.692) and (return_mean2 <= -0.256) and (return_sd2 <= 2.301) then class: simulated (proba: 100.0%) | based on 1 samples
+
+if (return_kurtosis1 <= 0.692) and (return_sd2 > 1.411) and (return_kurtosis2 > 1.904) then class: real (proba: 100.0%) | based on 1 samples
+

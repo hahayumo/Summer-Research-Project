@@ -1,0 +1,8 @@
+if (return_kurtosis2 <= 0.473) and (return_kurtosis1 <= 1.574) and (sqreturn_correlation_ts1_lag_0 <= 0.454) then class: simulated (proba: 100.0%) | based on 132 samples
+
+if (return_kurtosis2 > 0.473) then class: real (proba: 100.0%) | based on 126 samples
+
+if (return_kurtosis2 <= 0.473) and (return_kurtosis1 > 1.574) then class: real (proba: 100.0%) | based on 1 samples
+
+if (return_kurtosis2 <= 0.473) and (return_kurtosis1 <= 1.574) and (sqreturn_correlation_ts1_lag_0 > 0.454) then class: real (proba: 100.0%) | based on 1 samples
+

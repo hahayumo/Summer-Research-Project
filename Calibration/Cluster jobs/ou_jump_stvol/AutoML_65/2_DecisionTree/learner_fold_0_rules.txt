@@ -1,0 +1,14 @@
+if (return_kurtosis1 > 0.987) and (sqreturn_autocorrelation_ts1_lag1 > 0.005) and (sqreturn_autocorrelation_ts2_lag2 > -0.034) then class: real (proba: 98.28%) | based on 116 samples
+
+if (return_kurtosis1 <= 0.987) and (return_sd1 > 1.359) and (return_sd1 <= 1.671) then class: simulated (proba: 100.0%) | based on 105 samples
+
+if (return_kurtosis1 > 0.987) and (sqreturn_autocorrelation_ts1_lag1 <= 0.005) and (sqreturn_autocorrelation_ts2_lag1 > 0.011) then class: real (proba: 82.35%) | based on 17 samples
+
+if (return_kurtosis1 > 0.987) and (sqreturn_autocorrelation_ts1_lag1 <= 0.005) and (sqreturn_autocorrelation_ts2_lag1 <= 0.011) then class: simulated (proba: 100.0%) | based on 12 samples
+
+if (return_kurtosis1 <= 0.987) and (return_sd1 <= 1.359) then class: real (proba: 100.0%) | based on 7 samples
+
+if (return_kurtosis1 <= 0.987) and (return_sd1 > 1.359) and (return_sd1 > 1.671) then class: real (proba: 100.0%) | based on 2 samples
+
+if (return_kurtosis1 > 0.987) and (sqreturn_autocorrelation_ts1_lag1 > 0.005) and (sqreturn_autocorrelation_ts2_lag2 <= -0.034) then class: simulated (proba: 100.0%) | based on 1 samples
+

@@ -47,6 +47,10 @@ def data_clean(csv_file):
 
 
 clean_data = data_clean(csv_file)
+
+clean_data = pd.concat([clean_data, pd.DataFrame(np.exp(clean_data.iloc[:, 2]))], axis=1)
+clean_data = pd.concat([clean_data, pd.DataFrame(np.exp(clean_data.iloc[:, 3]))], axis=1)
+
 mean_data = clean_data.mean(axis=0)
 std_data = clean_data.std(axis=0)
 print(mean_data)

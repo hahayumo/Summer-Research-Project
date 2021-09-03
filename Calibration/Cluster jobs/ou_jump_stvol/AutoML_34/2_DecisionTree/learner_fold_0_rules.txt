@@ -1,0 +1,10 @@
+if (return_sd2 > 1.652) and (return_sd2 <= 1.924) and (sqreturn_autocorrelation_ts1_lag1 <= 0.085) then class: simulated (proba: 97.52%) | based on 121 samples
+
+if (return_sd2 <= 1.652) then class: real (proba: 100.0%) | based on 77 samples
+
+if (return_sd2 > 1.652) and (return_sd2 > 1.924) and (sqreturn_autocorrelation_ts2_lag3 > -0.008) then class: real (proba: 97.3%) | based on 37 samples
+
+if (return_sd2 > 1.652) and (return_sd2 <= 1.924) and (sqreturn_autocorrelation_ts1_lag1 > 0.085) then class: real (proba: 75.0%) | based on 16 samples
+
+if (return_sd2 > 1.652) and (return_sd2 > 1.924) and (sqreturn_autocorrelation_ts2_lag3 <= -0.008) then class: simulated (proba: 77.78%) | based on 9 samples
+

@@ -1,0 +1,14 @@
+if (return_kurtosis1 <= 1.218) and (return_sd1 > 1.652) and (sqreturn_correlation_ts1_lag_3 > -0.089) then class: simulated (proba: 100.0%) | based on 122 samples
+
+if (return_kurtosis1 > 1.218) and (price1_granger_cause_price2 > 0.001) and (sqreturn_autocorrelation_ts1_lag1 > 0.007) then class: real (proba: 100.0%) | based on 107 samples
+
+if (return_kurtosis1 > 1.218) and (price1_granger_cause_price2 > 0.001) and (sqreturn_autocorrelation_ts1_lag1 <= 0.007) then class: real (proba: 72.73%) | based on 11 samples
+
+if (return_kurtosis1 <= 1.218) and (return_sd1 <= 1.652) then class: real (proba: 100.0%) | based on 11 samples
+
+if (return_kurtosis1 > 1.218) and (price1_granger_cause_price2 <= 0.001) and (sqreturn_autocorrelation_ts2_lag3 <= 0.001) then class: simulated (proba: 100.0%) | based on 5 samples
+
+if (return_kurtosis1 > 1.218) and (price1_granger_cause_price2 <= 0.001) and (sqreturn_autocorrelation_ts2_lag3 > 0.001) then class: real (proba: 100.0%) | based on 3 samples
+
+if (return_kurtosis1 <= 1.218) and (return_sd1 > 1.652) and (sqreturn_correlation_ts1_lag_3 <= -0.089) then class: real (proba: 100.0%) | based on 1 samples
+

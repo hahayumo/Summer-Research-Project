@@ -1,0 +1,23 @@
+/var/spool/torque/mom_priv/jobs/407307.openpbs.mathscluster.ma.ic.ac.uk.SC:74: RuntimeWarning: overflow encountered in exp
+  return(np.exp(n_log_price))
+/var/spool/torque/mom_priv/jobs/407307.openpbs.mathscluster.ma.ic.ac.uk.SC:80: RuntimeWarning: divide by zero encountered in log
+  n_return = pd.concat([n_return, 100 * (np.log(ith_column_price_series[1:].values) - np.log(ith_column_price_series[:-1]))], axis=1)
+/usr/local/lib/python3.6/dist-packages/pandas/core/series.py:679: RuntimeWarning: divide by zero encountered in log
+  result = getattr(ufunc, method)(*inputs, **kwargs)
+/usr/local/lib/python3.6/dist-packages/numpy/lib/function_base.py:2551: RuntimeWarning: Degrees of freedom <= 0 for slice
+  c = cov(x, y, rowvar)
+/usr/local/lib/python3.6/dist-packages/numpy/lib/function_base.py:2480: RuntimeWarning: divide by zero encountered in true_divide
+  c *= np.true_divide(1, fact)
+/usr/local/lib/python3.6/dist-packages/numpy/core/_methods.py:160: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims)
+/usr/local/lib/python3.6/dist-packages/scipy/optimize/optimize.py:1947: RuntimeWarning: invalid value encountered in double_scalars
+  p = (xf - fulc) * q - (xf - nfc) * r
+/usr/local/lib/python3.6/dist-packages/scipy/optimize/optimize.py:1948: RuntimeWarning: invalid value encountered in double_scalars
+  q = 2.0 * (q - r)
+R[write to console]: Warning message:
+
+R[write to console]: In (function (package, help, pos = 2, lib.loc = NULL, character.only = FALSE,  :
+R[write to console]: 
+ 
+R[write to console]:  library ‘/usr/lib/R/site-library’ contains no packages
+

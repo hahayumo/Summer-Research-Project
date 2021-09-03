@@ -1,0 +1,6 @@
+if (return_autocorrelation_2_lag3 > 0.14) then class: simulated (proba: 100.0%) | based on 137 samples
+
+if (return_autocorrelation_2_lag3 <= 0.14) and (price1_granger_cause_price2 > 0.0) then class: real (proba: 100.0%) | based on 122 samples
+
+if (return_autocorrelation_2_lag3 <= 0.14) and (price1_granger_cause_price2 <= 0.0) then class: simulated (proba: 100.0%) | based on 1 samples
+

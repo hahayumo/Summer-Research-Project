@@ -1,0 +1,117 @@
+{
+    "columns": [
+        "return_mean1",
+        "return_mean2",
+        "return_sd1",
+        "return_sd2",
+        "return_skew1",
+        "return_skew2",
+        "return_kurtosis1",
+        "return_kurtosis2",
+        "return_autocorrelation_1_lag1",
+        "return_autocorrelation_1_lag2",
+        "return_autocorrelation_1_lag3",
+        "return_autocorrelation_2_lag1",
+        "return_autocorrelation_2_lag2",
+        "return_autocorrelation_2_lag3",
+        "return_correlation_ts1_lag_0",
+        "return_correlation_ts1_lag_1",
+        "return_correlation_ts1_lag_2",
+        "return_correlation_ts1_lag_3",
+        "return_correlation_ts2_lag_1",
+        "return_correlation_ts2_lag_2",
+        "return_correlation_ts2_lag_3",
+        "sqreturn_autocorrelation_ts1_lag1",
+        "sqreturn_autocorrelation_ts1_lag2",
+        "sqreturn_autocorrelation_ts1_lag3",
+        "sqreturn_autocorrelation_ts2_lag1",
+        "sqreturn_autocorrelation_ts2_lag2",
+        "sqreturn_autocorrelation_ts2_lag3",
+        "sqreturn_correlation_ts1_lag_0",
+        "sqreturn_correlation_ts1_lag_1",
+        "sqreturn_correlation_ts1_lag_2",
+        "sqreturn_correlation_ts1_lag_3",
+        "sqreturn_correlation_ts2_lag_1",
+        "sqreturn_correlation_ts2_lag_2",
+        "sqreturn_correlation_ts2_lag_3",
+        "price2_granger_cause_price1",
+        "price1_granger_cause_price2"
+    ],
+    "rows": 347,
+    "cols": 36,
+    "target_is_numeric": false,
+    "columns_info": {
+        "return_mean1": [
+            "scale"
+        ],
+        "return_mean2": [
+            "scale"
+        ],
+        "return_sd1": [
+            "scale"
+        ],
+        "return_sd2": [
+            "scale"
+        ],
+        "return_skew1": [],
+        "return_skew2": [],
+        "return_kurtosis1": [
+            "scale"
+        ],
+        "return_kurtosis2": [
+            "scale"
+        ],
+        "return_autocorrelation_1_lag1": [
+            "scale"
+        ],
+        "return_autocorrelation_1_lag2": [
+            "scale"
+        ],
+        "return_autocorrelation_1_lag3": [
+            "scale"
+        ],
+        "return_autocorrelation_2_lag1": [
+            "scale"
+        ],
+        "return_autocorrelation_2_lag2": [
+            "scale"
+        ],
+        "return_autocorrelation_2_lag3": [],
+        "return_correlation_ts1_lag_0": [],
+        "return_correlation_ts1_lag_1": [],
+        "return_correlation_ts1_lag_2": [],
+        "return_correlation_ts1_lag_3": [],
+        "return_correlation_ts2_lag_1": [],
+        "return_correlation_ts2_lag_2": [],
+        "return_correlation_ts2_lag_3": [],
+        "sqreturn_autocorrelation_ts1_lag1": [
+            "scale"
+        ],
+        "sqreturn_autocorrelation_ts1_lag2": [
+            "scale"
+        ],
+        "sqreturn_autocorrelation_ts1_lag3": [],
+        "sqreturn_autocorrelation_ts2_lag1": [
+            "scale"
+        ],
+        "sqreturn_autocorrelation_ts2_lag2": [
+            "scale"
+        ],
+        "sqreturn_autocorrelation_ts2_lag3": [],
+        "sqreturn_correlation_ts1_lag_0": [],
+        "sqreturn_correlation_ts1_lag_1": [],
+        "sqreturn_correlation_ts1_lag_2": [],
+        "sqreturn_correlation_ts1_lag_3": [],
+        "sqreturn_correlation_ts2_lag_1": [],
+        "sqreturn_correlation_ts2_lag_2": [],
+        "sqreturn_correlation_ts2_lag_3": [],
+        "price2_granger_cause_price1": [],
+        "price1_granger_cause_price2": []
+    },
+    "target_info": [
+        "convert_0_1"
+    ],
+    "n_features": 36,
+    "is_sample_weighted": false,
+    "n_classes": 2
+}

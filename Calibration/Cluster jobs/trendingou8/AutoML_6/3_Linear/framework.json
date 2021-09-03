@@ -1,0 +1,233 @@
+{
+    "uid": "78c28853-f8f8-46d7-8cbf-f54556adfb0d",
+    "name": "3_Linear",
+    "preprocessing": [
+        {
+            "scale": [
+                {
+                    "scale": [
+                        61.2224139736472,
+                        176.2928503427479,
+                        0.4584370106734141,
+                        0.33056948257615343,
+                        0.4127308608074388,
+                        4.169200607174888,
+                        12.802237414121679,
+                        0.0206268317342429,
+                        0.01872778177919437,
+                        0.3772766960796976,
+                        0.07953500980681348,
+                        0.08898245350252745,
+                        0.3478099374594763
+                    ],
+                    "mean": [
+                        159.93634209010136,
+                        261.10378940427444,
+                        0.5523228701001089,
+                        1.5174583006561504,
+                        1.6047844653459764,
+                        2.1773906028968457,
+                        4.810885519395311,
+                        0.9460604911367179,
+                        0.9445357304564614,
+                        0.6574073347109697,
+                        1.9944865979937754,
+                        1.9881315871508902,
+                        0.5465290041542008
+                    ],
+                    "var": [
+                        3748.1839727606316,
+                        31079.16908197051,
+                        0.21016449275517596,
+                        0.1092761828106658,
+                        0.17034676346284944,
+                        17.38223370286746,
+                        163.89728280753695,
+                        0.00042546618739277,
+                        0.00035072981036912465,
+                        0.1423377054048125,
+                        0.0063258177849699155,
+                        0.00791787703132946,
+                        0.12097175259556482
+                    ],
+                    "n_samples_seen": 260,
+                    "n_features_in": 13,
+                    "columns": [
+                        "standardised_price_mean1",
+                        "standardised_price_mean2",
+                        "return_mean2",
+                        "return_sd1",
+                        "return_sd2",
+                        "return_kurtosis1",
+                        "return_kurtosis2",
+                        "return_autocorrelation_lag1_rolling_sd1",
+                        "return_autocorrelation_lag1_rolling_sd2",
+                        "return_correlation_ts1_lag_0",
+                        "durbin_watson_statistic1",
+                        "durbin_watson_statistic2",
+                        "co_integration_statistic"
+                    ],
+                    "scale_method": "scale_normal"
+                }
+            ],
+            "categorical_y": {
+                "real": 0,
+                "simulated": 1
+            },
+            "ml_task": "binary_classification",
+            "params": {
+                "columns_preprocessing": {
+                    "standardised_price_mean1": [
+                        "scale_normal"
+                    ],
+                    "standardised_price_mean2": [
+                        "scale_normal"
+                    ],
+                    "return_mean2": [
+                        "scale_normal"
+                    ],
+                    "return_sd1": [
+                        "scale_normal"
+                    ],
+                    "return_sd2": [
+                        "scale_normal"
+                    ],
+                    "return_kurtosis1": [
+                        "scale_normal"
+                    ],
+                    "return_kurtosis2": [
+                        "scale_normal"
+                    ],
+                    "return_autocorrelation_lag1_rolling_sd1": [
+                        "scale_normal"
+                    ],
+                    "return_autocorrelation_lag1_rolling_sd2": [
+                        "scale_normal"
+                    ],
+                    "return_correlation_ts1_lag_0": [
+                        "scale_normal"
+                    ],
+                    "durbin_watson_statistic1": [
+                        "scale_normal"
+                    ],
+                    "durbin_watson_statistic2": [
+                        "scale_normal"
+                    ],
+                    "co_integration_statistic": [
+                        "scale_normal"
+                    ]
+                },
+                "target_preprocessing": [
+                    "na_exclude",
+                    "categorical_to_int"
+                ],
+                "ml_task": "binary_classification"
+            }
+        }
+    ],
+    "learners": [
+        {
+            "library_version": "0.24.2",
+            "algorithm_name": "Logistic Regression",
+            "algorithm_short_name": "Linear",
+            "uid": "4b7cd2bb-e904-4254-a278-04ecc34e2023",
+            "params": {
+                "model_type": "Linear",
+                "ml_task": "binary_classification",
+                "n_jobs": -1,
+                "seed": 1235,
+                "explain_level": 2
+            },
+            "name": "learner_fold_0"
+        }
+    ],
+    "params": {
+        "additional": {
+            "max_steps": 1,
+            "max_rows_limit": null,
+            "max_cols_limit": null
+        },
+        "preprocessing": {
+            "columns_preprocessing": {
+                "standardised_price_mean1": [
+                    "scale_normal"
+                ],
+                "standardised_price_mean2": [
+                    "scale_normal"
+                ],
+                "return_mean2": [
+                    "scale_normal"
+                ],
+                "return_sd1": [
+                    "scale_normal"
+                ],
+                "return_sd2": [
+                    "scale_normal"
+                ],
+                "return_kurtosis1": [
+                    "scale_normal"
+                ],
+                "return_kurtosis2": [
+                    "scale_normal"
+                ],
+                "return_autocorrelation_lag1_rolling_sd1": [
+                    "scale_normal"
+                ],
+                "return_autocorrelation_lag1_rolling_sd2": [
+                    "scale_normal"
+                ],
+                "return_correlation_ts1_lag_0": [
+                    "scale_normal"
+                ],
+                "durbin_watson_statistic1": [
+                    "scale_normal"
+                ],
+                "durbin_watson_statistic2": [
+                    "scale_normal"
+                ],
+                "co_integration_statistic": [
+                    "scale_normal"
+                ]
+            },
+            "target_preprocessing": [
+                "na_exclude",
+                "categorical_to_int"
+            ],
+            "ml_task": "binary_classification"
+        },
+        "validation_strategy": {
+            "validation_type": "split",
+            "train_ratio": 0.75,
+            "shuffle": true,
+            "stratify": true,
+            "X_path": "AutoML_6/X.data",
+            "y_path": "AutoML_6/y.data",
+            "results_path": "AutoML_6"
+        },
+        "learner": {
+            "model_type": "Linear",
+            "ml_task": "binary_classification",
+            "n_jobs": -1,
+            "seed": 1235,
+            "explain_level": 2
+        },
+        "automl_random_state": 1234,
+        "ml_task": "binary_classification",
+        "explain_level": 2,
+        "name": "3_Linear",
+        "status": "initialized",
+        "final_loss": null,
+        "train_time": null,
+        "data_type": "original",
+        "max_time_for_learner": 360.0
+    },
+    "saved": [
+        "3_Linear/learner_fold_0.linear"
+    ],
+    "predictions_fname": "3_Linear/predictions_validation.csv",
+    "metric_name": "accuracy",
+    "final_loss": -1.0,
+    "train_time": 26.35384202003479,
+    "is_stacked": false,
+    "threshold": 0.49077232912240243
+}

@@ -1,0 +1,14 @@
+if (return_skew1 > -0.608) and (sqreturn_correlation_ts1_lag_0 <= 0.81) and (return_autocorrelation_1_lag1 > 0.961) then class: simulated (proba: 58.1%) | based on 179 samples
+
+if (return_skew1 > -0.608) and (sqreturn_correlation_ts1_lag_0 > 0.81) and (sqreturn_correlation_ts2_lag_2 > 0.833) then class: real (proba: 56.52%) | based on 46 samples
+
+if (return_skew1 <= -0.608) and (price2_granger_cause_price1 > 0.19) then class: real (proba: 100.0%) | based on 13 samples
+
+if (return_skew1 > -0.608) and (sqreturn_correlation_ts1_lag_0 > 0.81) and (sqreturn_correlation_ts2_lag_2 <= 0.833) then class: real (proba: 100.0%) | based on 8 samples
+
+if (return_skew1 <= -0.608) and (price2_granger_cause_price1 <= 0.19) and (return_autocorrelation_2_lag2 <= 0.986) then class: real (proba: 83.33%) | based on 6 samples
+
+if (return_skew1 > -0.608) and (sqreturn_correlation_ts1_lag_0 <= 0.81) and (return_autocorrelation_1_lag1 <= 0.961) then class: real (proba: 100.0%) | based on 4 samples
+
+if (return_skew1 <= -0.608) and (price2_granger_cause_price1 <= 0.19) and (return_autocorrelation_2_lag2 > 0.986) then class: simulated (proba: 100.0%) | based on 4 samples
+

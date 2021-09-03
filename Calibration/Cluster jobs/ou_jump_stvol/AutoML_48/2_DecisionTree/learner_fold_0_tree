@@ -1,0 +1,135 @@
+
+digraph G {
+    splines=line;
+    nodesep=0.1;
+    ranksep=.2;
+    rankdir=TD;
+    margin=0.0;
+    
+    node [margin="0.03" penwidth="0.5" width=.1, height=.1];
+    edge [arrowsize=.4 penwidth="0.3"]
+
+    node1 [margin="0" shape=none label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/node1_36375.svg"/></td>
+            </tr>
+            </table>>]
+	node5 [margin="0" shape=none label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/node5_36375.svg"/></td>
+            </tr>
+            </table>>]
+	node8 [margin="0" shape=none label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/node8_36375.svg"/></td>
+            </tr>
+            </table>>]
+	node4 [margin="0" shape=none label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/node4_36375.svg"/></td>
+            </tr>
+            </table>>]
+	node0 [margin="0" shape=none label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/node0_36375.svg"/></td>
+            </tr>
+            </table>>]
+    node1 -> leaf2 [penwidth=0.3 color="#444443" label=<>]
+	node1 -> leaf3 [penwidth=0.3 color="#444443" label=<>]
+	
+            {
+                rank=same;
+                leaf2 -> leaf3 [style=invis]
+            }
+            
+	node5 -> leaf6 [penwidth=0.3 color="#444443" label=<>]
+	node5 -> leaf7 [penwidth=0.3 color="#444443" label=<>]
+	
+            {
+                rank=same;
+                leaf6 -> leaf7 [style=invis]
+            }
+            
+	node8 -> leaf9 [penwidth=0.3 color="#444443" label=<>]
+	node8 -> leaf10 [penwidth=0.3 color="#444443" label=<>]
+	
+            {
+                rank=same;
+                leaf9 -> leaf10 [style=invis]
+            }
+            
+	node4 -> node5 [penwidth=0.3 color="#444443" label=<>]
+	node4 -> node8 [penwidth=0.3 color="#444443" label=<>]
+	
+            {
+                rank=same;
+                node5 -> node8 [style=invis]
+            }
+            
+	node0 -> node1 [penwidth=0.3 color="#444443" label=<&le;>]
+	node0 -> node4 [penwidth=0.3 color="#444443" label=<&gt;>]
+	
+            {
+                rank=same;
+                node1 -> node4 [style=invis]
+            }
+            
+    leaf2 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0" CELLBORDER="0">
+        
+        <tr>
+                <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/leaf2_36375.svg"/></td>
+        </tr>
+        </table>>]
+	leaf3 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0" CELLBORDER="0">
+        
+        <tr>
+                <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/leaf3_36375.svg"/></td>
+        </tr>
+        </table>>]
+	leaf6 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0" CELLBORDER="0">
+        
+        <tr>
+                <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/leaf6_36375.svg"/></td>
+        </tr>
+        </table>>]
+	leaf7 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0" CELLBORDER="0">
+        
+        <tr>
+                <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/leaf7_36375.svg"/></td>
+        </tr>
+        </table>>]
+	leaf9 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0" CELLBORDER="0">
+        
+        <tr>
+                <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/leaf9_36375.svg"/></td>
+        </tr>
+        </table>>]
+	leaf10 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0" CELLBORDER="0">
+        
+        <tr>
+                <td><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/leaf10_36375.svg"/></td>
+        </tr>
+        </table>>]
+
+    
+            subgraph cluster_legend {
+                style=invis;
+                legend [penwidth="0" margin="0" shape=box margin="0.03" width=.1, height=.1 label=<
+                
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td border="0" cellspacing="0" cellpadding="0"><img src="/var/folders/wy/d2twbjm10951_4dc1k_jt2_80000gn/T/legend_36375.svg"/></td>
+            </tr>
+        </table>
+        
+                >]
+            }
+            
+    
+}
+    

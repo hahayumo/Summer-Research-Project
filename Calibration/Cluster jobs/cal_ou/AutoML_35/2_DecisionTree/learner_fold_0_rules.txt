@@ -1,0 +1,4 @@
+if (return_autocorrelation_2_lag3 > 0.19) then class: simulated (proba: 100.0%) | based on 137 samples
+
+if (return_autocorrelation_2_lag3 <= 0.19) then class: real (proba: 100.0%) | based on 123 samples
+

@@ -1,0 +1,12 @@
+if (return_kurtosis1 <= 1.292) and (return_sd1 > 1.653) and (return_sd2 <= 2.125) then class: simulated (proba: 99.2%) | based on 125 samples
+
+if (return_kurtosis1 > 1.292) and (price1_granger_cause_price2 > 0.0) and (price2_granger_cause_price1 > 0.001) then class: real (proba: 98.29%) | based on 117 samples
+
+if (return_kurtosis1 <= 1.292) and (return_sd1 <= 1.653) then class: real (proba: 100.0%) | based on 9 samples
+
+if (return_kurtosis1 > 1.292) and (price1_granger_cause_price2 <= 0.0) then class: simulated (proba: 100.0%) | based on 6 samples
+
+if (return_kurtosis1 <= 1.292) and (return_sd1 > 1.653) and (return_sd2 > 2.125) then class: real (proba: 100.0%) | based on 2 samples
+
+if (return_kurtosis1 > 1.292) and (price1_granger_cause_price2 > 0.0) and (price2_granger_cause_price1 <= 0.001) then class: simulated (proba: 100.0%) | based on 1 samples
+

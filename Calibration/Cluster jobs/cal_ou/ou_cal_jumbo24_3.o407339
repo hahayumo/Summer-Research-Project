@@ -1,0 +1,144 @@
+Optimization terminated successfully.
+         Current function value: 1506.086013
+         Iterations: 4
+         Function evaluations: 815
+[  0.57342491   0.17523892   1.32407189   0.40018664 -13.57794825
+  -1.27646759  -1.35137891  -2.24670399]
+Optimization terminated successfully.
+         Current function value: 1512.203035
+         Iterations: 4
+         Function evaluations: 871
+[ 1.07585558  0.26797111  0.97226071  0.1927954  -5.60167743 -1.32224275
+ -1.26787529 -2.54871728]
+Optimization terminated successfully.
+         Current function value: 1496.876332
+         Iterations: 4
+         Function evaluations: 884
+[  1.2371996    0.4078109    0.34078692   0.08370987 -11.19322551
+  -1.32907492  -1.40357058  -2.44191329]
+Optimization terminated successfully.
+         Current function value: 1509.771810
+         Iterations: 4
+         Function evaluations: 949
+[ 1.18146667  0.29390253  0.98957314  0.26751436 -6.41286654 -1.36916782
+ -1.33907806 -2.28801726]
+Optimization terminated successfully.
+         Current function value: 1510.962179
+         Iterations: 5
+         Function evaluations: 1044
+[ 0.90740579  0.15552447  0.89330573  0.17592792 -5.62869464 -1.30642591
+ -1.35406759 -2.23431929]
+Optimization terminated successfully.
+         Current function value: 1506.824229
+         Iterations: 5
+         Function evaluations: 1038
+[ 1.0333439   0.30100276  0.94139923  0.28893489 -3.74423605 -1.29043186
+ -1.34072331 -3.061174  ]
+Optimization terminated successfully.
+         Current function value: 1508.012431
+         Iterations: 5
+         Function evaluations: 1032
+[ 1.29586702  0.31414761  0.6139506   0.09764636 -4.65484563 -1.34585216
+ -1.2833822  -2.62249837]
+Optimization terminated successfully.
+         Current function value: 1526.091419
+         Iterations: 5
+         Function evaluations: 1049
+[ 1.06873996  0.35838615  1.40699603  0.41376979 -7.82647541 -1.34543896
+ -1.2028268  -2.38185033]
+Optimization terminated successfully.
+         Current function value: 1517.894169
+         Iterations: 5
+         Function evaluations: 1069
+[ 0.70422437  0.08920311  1.60424074  0.36653553 -9.80045027 -1.31664374
+ -1.36490675 -2.47547849]
+Optimization terminated successfully.
+         Current function value: 1512.586070
+         Iterations: 5
+         Function evaluations: 1063
+[ 1.1112291   0.24638375  1.05482516  0.26758633 -4.85855264 -1.16145028
+ -1.35876992 -2.71700452]
+Optimization terminated successfully.
+         Current function value: 1516.373762
+         Iterations: 5
+         Function evaluations: 1089
+[  1.07202621   0.25562232   1.18885294   0.2386229  -11.10307012
+  -1.27195896  -1.27767081  -2.34048013]
+Optimization terminated successfully.
+         Current function value: 1499.786970
+         Iterations: 6
+         Function evaluations: 1243
+[ 1.07006112  0.28434232  0.56518842  0.19724055 -2.78514063 -1.39180679
+ -1.33231701 -4.26244252]
+Optimization terminated successfully.
+         Current function value: 1494.296303
+         Iterations: 6
+         Function evaluations: 1289
+[ 0.67028477  0.19902698  0.60252141  0.18997508 -5.82564648 -1.36223115
+ -1.42025741 -2.4698011 ]
+Optimization terminated successfully.
+         Current function value: 1513.813754
+         Iterations: 6
+         Function evaluations: 1343
+[ 0.95223821  0.20460651  0.62625409  0.18407889 -4.79622642 -1.28326402
+ -1.42645278 -2.20562569]
+Optimization terminated successfully.
+         Current function value: 1503.101432
+         Iterations: 7
+         Function evaluations: 1436
+[ 1.31614005  0.33535918  0.55004055  0.19121427 -4.88861858 -1.28301987
+ -1.40505057 -2.7767602 ]
+Optimization terminated successfully.
+         Current function value: 1507.421874
+         Iterations: 7
+         Function evaluations: 1472
+[ 0.67019976  0.17946828  1.23246256  0.29437853 -8.37226374 -1.36500799
+ -1.49423463 -2.51568975]
+Optimization terminated successfully.
+         Current function value: 1499.390251
+         Iterations: 7
+         Function evaluations: 1478
+[ 1.14593301  0.27446114  0.65793721  0.10144547 -4.65303949 -1.3538324
+ -1.33209897 -2.4733321 ]
+Optimization terminated successfully.
+         Current function value: 1497.168089
+         Iterations: 8
+         Function evaluations: 1605
+[ 0.38482648  0.12346833  0.65171965  0.19106789 -5.32670831 -1.22444181
+ -1.3736249  -2.61477072]
+Optimization terminated successfully.
+         Current function value: 1497.095454
+         Iterations: 8
+         Function evaluations: 1723
+[ 0.27531177  0.09377294  0.77044846  0.18485363 -5.14088762 -1.38655389
+ -1.29870253 -2.52197232]
+Optimization terminated successfully.
+         Current function value: 1504.151267
+         Iterations: 8
+         Function evaluations: 1746
+[  0.76853146   0.18949969   1.28001578   0.31589255 -11.66938242
+  -1.27841614  -1.43261871  -2.6445904 ]
+Optimization terminated successfully.
+         Current function value: 1488.819928
+         Iterations: 9
+         Function evaluations: 1920
+[ 0.46572435  0.12524669  0.651556    0.1563626  -7.96364374 -1.31377365
+ -1.39282956 -2.69013086]
+Optimization terminated successfully.
+         Current function value: 1499.545924
+         Iterations: 9
+         Function evaluations: 1903
+[ 0.93816167  0.2415754   0.5974018   0.1264493  -5.24934048 -1.35701422
+ -1.48715842 -2.58808951]
+Optimization terminated successfully.
+         Current function value: 1495.413059
+         Iterations: 9
+         Function evaluations: 1927
+[  1.08675705   0.26981579   0.55661915   0.14649227 -24.05441127
+  -1.37634551  -1.39697795  -2.54510485]
+Optimization terminated successfully.
+         Current function value: 1487.503438
+         Iterations: 10
+         Function evaluations: 2153
+[ 0.66155703  0.09589125  0.2587132   0.04681579 -4.70805831 -1.34120966
+ -1.41675395 -2.57458769]

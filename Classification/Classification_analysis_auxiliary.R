@@ -1,0 +1,17 @@
+#par(mfrow=c(2, 2))
+#hist(unlist(return_real), breaks=600, xlim=c(-15, 15))
+#hist(unlist(return_ou), breaks=100, xlim=c(-15, 15))
+#hist(unlist(return_jumpou), breaks=200, xlim=c(-15, 15))
+#hist(unlist(return_stvol), breaks=150, xlim=c(-15, 15))
+
+#par(mfrow=c(2, 2))
+#hist(unlist(return_real), breaks=100)
+#hist(unlist(return_ou), breaks=100)
+#hist(unlist(return_jumpou), breaks=100)
+#hist(unlist(return_stvol), breaks=100)
+
+#par(mfrow=c(2, 2))
+#hist(unlist(return_real), breaks=100, xlim=c(-50, 50))
+#hist(unlist(return_ou), breaks=100, xlim=c(-50, 50))
+#hist(unlist(return_jumpou), breaks=100, xlim=c(-50, 50))
+#hist(unlist(return_stvol), breaks=100, xlim=c(-50, 50))

@@ -1,0 +1,6 @@
+if (kurtosis2 > 0.779) then class: real (proba: 100.0%) | based on 131 samples
+
+if (kurtosis2 <= 0.779) and (kurtosis1 <= 1.282) then class: simulated (proba: 100.0%) | based on 127 samples
+
+if (kurtosis2 <= 0.779) and (kurtosis1 > 1.282) then class: real (proba: 100.0%) | based on 2 samples
+

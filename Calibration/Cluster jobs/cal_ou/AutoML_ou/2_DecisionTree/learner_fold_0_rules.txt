@@ -1,0 +1,6 @@
+if (return_kurtosis2 <= 0.78) and (return_sd1 > 1.677) then class: simulated (proba: 100.0%) | based on 131 samples
+
+if (return_kurtosis2 > 0.78) then class: real (proba: 100.0%) | based on 125 samples
+
+if (return_kurtosis2 <= 0.78) and (return_sd1 <= 1.677) then class: real (proba: 100.0%) | based on 4 samples
+

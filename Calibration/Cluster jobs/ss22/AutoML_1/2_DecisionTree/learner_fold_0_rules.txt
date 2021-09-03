@@ -1,0 +1,14 @@
+if (return_autocorrelation_lag1_rolling_sd2 > 0.98) and (standardised_price_mean2 <= 99.28) and (price_adf_p_values > 0.001) then class: simulated (proba: 100.0%) | based on 125 samples
+
+if (return_autocorrelation_lag1_rolling_sd2 <= 0.98) and (standardised_price_mean2 > 70.634) and (return_autocorrelation_lag1_rolling_sd1 <= 0.99) then class: real (proba: 100.0%) | based on 120 samples
+
+if (return_autocorrelation_lag1_rolling_sd2 > 0.98) and (standardised_price_mean2 > 99.28) and (return_autocorrelation_lag1_rolling_sd1 <= 0.989) then class: real (proba: 100.0%) | based on 6 samples
+
+if (return_autocorrelation_lag1_rolling_sd2 > 0.98) and (standardised_price_mean2 > 99.28) and (return_autocorrelation_lag1_rolling_sd1 > 0.989) then class: simulated (proba: 100.0%) | based on 4 samples
+
+if (return_autocorrelation_lag1_rolling_sd2 > 0.98) and (standardised_price_mean2 <= 99.28) and (price_adf_p_values <= 0.001) then class: real (proba: 50.0%) | based on 2 samples
+
+if (return_autocorrelation_lag1_rolling_sd2 <= 0.98) and (standardised_price_mean2 <= 70.634) then class: simulated (proba: 100.0%) | based on 2 samples
+
+if (return_autocorrelation_lag1_rolling_sd2 <= 0.98) and (standardised_price_mean2 > 70.634) and (return_autocorrelation_lag1_rolling_sd1 > 0.99) then class: simulated (proba: 100.0%) | based on 1 samples
+

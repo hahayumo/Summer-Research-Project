@@ -1,0 +1,8 @@
+if (return_autocorrelation_1_lag3 > 0.919) and (return_autocorrelation_1_lag2 > 0.958) and (return_sd1 <= 18.052) then class: simulated (proba: 54.09%) | based on 220 samples
+
+if (return_autocorrelation_1_lag3 > 0.919) and (return_autocorrelation_1_lag2 > 0.958) and (return_sd1 > 18.052) then class: real (proba: 75.0%) | based on 20 samples
+
+if (return_autocorrelation_1_lag3 > 0.919) and (return_autocorrelation_1_lag2 <= 0.958) then class: simulated (proba: 100.0%) | based on 12 samples
+
+if (return_autocorrelation_1_lag3 <= 0.919) then class: real (proba: 100.0%) | based on 8 samples
+
