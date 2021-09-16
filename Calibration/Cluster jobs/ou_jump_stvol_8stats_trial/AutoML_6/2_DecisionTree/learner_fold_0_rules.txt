@@ -1,6 +1,0 @@
-if (return_autocorrelation_1_lag1 > 0.146) then class: simulated (proba: 100.0%) | based on 132 samples
-
-if (return_autocorrelation_1_lag1 <= 0.146) and (sqreturn_autocorrelation_ts2_lag1 > -0.083) then class: real (proba: 100.0%) | based on 127 samples
-
-if (return_autocorrelation_1_lag1 <= 0.146) and (sqreturn_autocorrelation_ts2_lag1 <= -0.083) then class: simulated (proba: 100.0%) | based on 1 samples
-

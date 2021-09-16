@@ -1,8 +1,0 @@
-if (return_kurtosis2 <= 0.719) and (return_kurtosis1 <= 1.107) then class: simulated (proba: 100.0%) | based on 127 samples
-
-if (return_kurtosis2 > 0.719) then class: real (proba: 100.0%) | based on 126 samples
-
-if (return_kurtosis2 <= 0.719) and (return_kurtosis1 > 1.107) and (price2_granger_cause_price1 > 0.007) then class: real (proba: 100.0%) | based on 6 samples
-
-if (return_kurtosis2 <= 0.719) and (return_kurtosis1 > 1.107) and (price2_granger_cause_price1 <= 0.007) then class: simulated (proba: 100.0%) | based on 1 samples
-

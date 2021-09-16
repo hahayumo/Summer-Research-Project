@@ -1,6 +1,0 @@
-if (return_mean2 > 0.286) then class: simulated (proba: 100.0%) | based on 132 samples
-
-if (return_mean2 <= 0.286) and (price1_granger_cause_price2 > 0.0) then class: real (proba: 100.0%) | based on 127 samples
-
-if (return_mean2 <= 0.286) and (price1_granger_cause_price2 <= 0.0) then class: simulated (proba: 100.0%) | based on 1 samples
-
