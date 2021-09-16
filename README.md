@@ -1,1 +1,1 @@
-# Summer-Research-Project - Using AutoML to Evaluate Financial Time Series Generating Models
+# Using AutoML to Evaluate Financial Time Series Generating Models
