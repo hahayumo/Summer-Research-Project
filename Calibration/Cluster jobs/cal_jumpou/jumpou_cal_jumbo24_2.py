@@ -20,7 +20,7 @@ from statsmodels.tsa.stattools import adfuller
 from sklearn.linear_model import LinearRegression
 import multiprocessing
 
-np.random.seed(17242)
+np.random.seed(16242)
 
 # Define the model that generates pair simulations.
 yuima = importr("yuima")
@@ -32,21 +32,28 @@ n_jumpou_NIG = function(random_seed, num_sim,
                         alpha, beta1, beta2, delta0, mu1, mu2, 
                         lambda11, lambda12, lambda21, lambda22,
                         xinit_vec, T0, T, length){
+  
   set.seed(random_seed)
+  
   drift = c("mu11*t-mu12*X1", "mu21*t-mu22*X2")
   diffusion = matrix(c("exp(sigma11)", "exp(sigma12)", "exp(sigma21)", "exp(sigma22)"), 2, 2, byrow=TRUE)
   jumpcoef = matrix(c("j11", "j12", "j21", "j22"), 2, 2, byrow=TRUE) 
-  alpha = alpha
+  
+  
   beta = c(beta1, beta2)
   delta0 = delta0
   mu = c(mu1, mu2)
-  Lambda = matrix(c(lambda11, lambda12, lambda21, lambda22), 2, 2, byrow=TRUE)
+  lambda11 = sum(lambda11)
+  alpha = beta1^2*lambda11 + beta2^2/lambda11 + 1
+  Lambda = matrix(c(lambda11, 0, 0, 1/lambda11), 2, 2, byrow=TRUE)
+  
   ou_model = setModel(drift=drift, diffusion=diffusion, jump.coeff=jumpcoef, 
                       measure.type="code",
                       measure=list(df="rNIG(z, alpha, beta, delta0, mu, Lambda)"), 
                       time.variable = "t",
                       state.var=c("X1","X2"), solve.variable=c("X1","X2"))
   newsamp = setSampling(Initial=T0, Terminal=T, n=length)
+  
   n_sim_data = data.frame(matrix(nrow=length+1, ncol=2*num_sim))
   for (i in 1:num_sim){
     jumpou_sim = simulate(ou_model, 
@@ -200,21 +207,21 @@ def cal_stats(n_return, n_price):
                                corr_sqts1_lag_1, corr_sqts1_lag_2, corr_sqts1_lag_3,
                                corr_sqts2_lag_1, corr_sqts2_lag_2, corr_sqts2_lag_3])#7(34)
     stats_data = stats_data.transpose()
-    stats_data.columns = [
-        'return_mean1', 'return_mean2',
-        'return_sd1', 'return_sd2',
-        'return_skew1', 'return_skew2',
-        'return_kurtosis1', 'return_kurtosis2',
-        'return_autocorrelation_ts1_lag1', 'return_autocorrelation_ts1_lag2', 'return_autocorrelation_ts1_lag3',
-        'return_autocorrelation_ts2_lag1', 'return_autocorrelation_ts2_lag2', 'return_autocorrelation_ts2_lag3',
-        'return_correlation_ts1_lag_0',
-        'return_correlation_ts1_lag_1', 'return_correlation_ts1_lag_2', 'return_correlation_ts1_lag_3',
-        'return_correlation_ts2_lag_1', 'return_correlation_ts2_lag_2', 'return_correlation_ts2_lag_3',
-        'sqreturn_autocorrelation_ts1_lag1', 'sqreturn_autocorrelation_ts1_lag2', 'sqreturn_autocorrelation_ts1_lag3',
-        'sqreturn_autocorrelation_ts2_lag1', 'sqreturn_autocorrelation_ts2_lag2', 'sqreturn_autocorrelation_ts2_lag3',
-        'sqreturn_correlation_ts1_lag_0',
-        'sqreturn_correlation_ts1_lag_1', 'sqreturn_correlation_ts1_lag_2', 'sqreturn_correlation_ts1_lag_3', 
-        'sqreturn_correlation_ts2_lag_1', 'sqreturn_correlation_ts2_lag_2', 'sqreturn_correlation_ts2_lag_3']
+    # stats_data.columns = [
+    #     'return_mean1', 'return_mean2',
+    #     'return_sd1', 'return_sd2',
+    #     'return_skew1', 'return_skew2',
+    #     'return_kurtosis1', 'return_kurtosis2',
+    #     'return_autocorrelation_ts1_lag1', 'return_autocorrelation_ts1_lag2', 'return_autocorrelation_ts1_lag3',
+    #     'return_autocorrelation_ts2_lag1', 'return_autocorrelation_ts2_lag2', 'return_autocorrelation_ts2_lag3',
+    #     'return_correlation_ts1_lag_0',
+    #     'return_correlation_ts1_lag_1', 'return_correlation_ts1_lag_2', 'return_correlation_ts1_lag_3',
+    #     'return_correlation_ts2_lag_1', 'return_correlation_ts2_lag_2', 'return_correlation_ts2_lag_3',
+    #     'sqreturn_autocorrelation_ts1_lag1', 'sqreturn_autocorrelation_ts1_lag2', 'sqreturn_autocorrelation_ts1_lag3',
+    #     'sqreturn_autocorrelation_ts2_lag1', 'sqreturn_autocorrelation_ts2_lag2', 'sqreturn_autocorrelation_ts2_lag3',
+    #     'sqreturn_correlation_ts1_lag_0',
+    #     'sqreturn_correlation_ts1_lag_1', 'sqreturn_correlation_ts1_lag_2', 'sqreturn_correlation_ts1_lag_3', 
+    #     'sqreturn_correlation_ts2_lag_1', 'sqreturn_correlation_ts2_lag_2', 'sqreturn_correlation_ts2_lag_3']
     return stats_data
 
 
@@ -222,6 +229,7 @@ def cal_stats(n_return, n_price):
 def loss_function(params):
     params = FloatVector(params)
     moment_loss = pd.DataFrame().reindex_like(real_stats)
+
     n_sim_log_price = n_jumpou_simulation(
         random_seed=int(np.random.randint(low=0, high=980608, size=(1,))), num_sim=num_sim,
         mu11=params[0], mu12=params[1], 
@@ -230,13 +238,14 @@ def loss_function(params):
         sigma21=params[6], sigma22=params[7],
         j11=params[8], j12=params[9], 
         j21=params[10], j22=params[11],
-        alpha=params[12], 
-        beta1=beta1, beta2=beta2, 
-        delta0=params[13], 
-        mu1=params[14], mu2=params[15], 
-        lambda11=params[16], lambda12=lambda12, 
-        lambda21=lambda21, lambda22=1/params[16],
-        xinit_vec=xinit_vec, T0=T0, T=T, length=length)
+        alpha=2*params[12]*params[13]+0.5, 
+        beta1=params[12], beta2=params[13], 
+        delta0=params[14], 
+        mu1=0, mu2=0, 
+        lambda11=params[15], lambda12=0, 
+        lambda21=0, lambda22=1/params[15],
+        xinit_vec=xinit_vec, T0=T0, T=T, length=length)    
+
     n_sim_price = log_price_to_price(n_sim_log_price)
     n_sim_return = price_to_return(n_sim_price)
     n_sim_stats = cal_stats(n_sim_return, n_sim_price)
@@ -260,30 +269,20 @@ for i in range(int(real_log_price.shape[1]/2)):
     init_pair_log_price = [real_log_price.iloc[0, 2*i], real_log_price.iloc[0, 2*i+1]]
     init_pair_log_price = FloatVector(init_pair_log_price)
     xinit_vec.append(init_pair_log_price)
-    
+
 
 num_sim, T0, T, length = real_stats.shape[0], 0, 2, real_price.shape[0]
 n_real_stats = real_stats
 
-
-#alpha
-beta1 = 0
-beta2 = 0
-#delta0
-#mu1
-#mu2
-#lambda11 = 1
-lambda12 = 0
-lambda21 = 0
-#lambda22 = 1
 
 
 num_iter = 24
 initial0 = [1, 1, 1, 1,
             -1, -1, -1, -1,
             0.1, 0.1, 0.1, 0.1,
-            1, 1,
-            1, 1,
+            
+            1, 1, 
+            1, 
             1]
 
 
@@ -291,14 +290,17 @@ iter_seed = np.random.randint(low=0, high=980608, size=(num_iter,))
 def multi_process(iter):
     np.random.seed(int(iter_seed[iter]))
     begin_time = datetime.datetime.now()                 
-    res = minimize(loss_function, initial0, method='Powell',
-               tol=1e-6, options={'disp': True},
-               bounds=[(0, None), (0, None), (0, None), (0, None),
-                       (None, None), (None, None), (None, None), (None, None),
-                       (None, None), (None, None), (None, None), (None, None),
-                       (0, None), (0, None),
-                       (None, None), (None, None), 
-                       (0, None)])
+    res = minimize(loss_function, initial0, method='powell',
+               tol=1e-6, 
+               options={'disp': True},
+               bounds=[                       
+                   (0, 1), (0, 1), (0, None), (0, None),
+                   (None, None), (None, None), (None, None), (None, None),
+                   (None, None), (None, None), (None, None), (None, None),
+                   
+                   (0, None), (0, None), 
+                   (0, None), 
+                   (0, None)])
     time = datetime.datetime.now() - begin_time
     params = (res.x)
     print(params)
