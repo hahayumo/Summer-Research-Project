@@ -1,0 +1,86 @@
+R[write to console]: Error in rNIG(n, alpha, beta, delta0 * delta, mu * delta, Lambda) : 
+  alpha must be nonnegative.
+
+R[write to console]: In addition: 
+R[write to console]: There were 50 or more warnings (use warnings() to see the first 50)
+R[write to console]: 
+
+R[write to console]: Error in rNIG(n, alpha, beta, delta0 * delta, mu * delta, Lambda) : 
+  alpha must be nonnegative.
+
+R[write to console]: In addition: 
+R[write to console]: There were 50 or more warnings (use warnings() to see the first 50)
+R[write to console]: 
+
+R[write to console]: Error in rNIG(n, alpha, beta, delta0 * delta, mu * delta, Lambda) : 
+  alpha must be nonnegative.
+
+R[write to console]: In addition: 
+R[write to console]: There were 50 or more warnings (use warnings() to see the first 50)
+R[write to console]: 
+
+/var/spool/torque/mom_priv/jobs/410551.openpbs.mathscluster.ma.ic.ac.uk.SC:98: RuntimeWarning: overflow encountered in exp
+  return(np.exp(n_log_price))
+/var/spool/torque/mom_priv/jobs/410551.openpbs.mathscluster.ma.ic.ac.uk.SC:104: RuntimeWarning: divide by zero encountered in log
+  n_return = pd.concat([n_return, 100 * (np.log(ith_column_price_series[1:].values) - np.log(ith_column_price_series[:-1]))], axis=1)
+/usr/local/lib/python3.6/dist-packages/pandas/core/series.py:679: RuntimeWarning: divide by zero encountered in log
+  result = getattr(ufunc, method)(*inputs, **kwargs)
+/usr/local/lib/python3.6/dist-packages/numpy/lib/function_base.py:2551: RuntimeWarning: Degrees of freedom <= 0 for slice
+  c = cov(x, y, rowvar)
+/usr/local/lib/python3.6/dist-packages/numpy/lib/function_base.py:2480: RuntimeWarning: divide by zero encountered in true_divide
+  c *= np.true_divide(1, fact)
+/usr/local/lib/python3.6/dist-packages/numpy/core/_methods.py:160: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims)
+/usr/local/lib/python3.6/dist-packages/scipy/optimize/optimize.py:2116: RuntimeWarning: invalid value encountered in double_scalars
+  tmp2 = (x - v) * (fx - fw)
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 44, in mapstar
+    return list(map(*args))
+  File "/var/spool/torque/mom_priv/jobs/410551.openpbs.mathscluster.ma.ic.ac.uk.SC", line 303, in multi_process
+    (0, None)])
+  File "/usr/local/lib/python3.6/dist-packages/scipy/optimize/_minimize.py", line 608, in minimize
+    return _minimize_powell(fun, x0, args, callback, bounds, **options)
+  File "/usr/local/lib/python3.6/dist-packages/scipy/optimize/optimize.py", line 2960, in _minimize_powell
+    fx2 = squeeze(func(x2))
+  File "/usr/local/lib/python3.6/dist-packages/scipy/optimize/optimize.py", line 427, in function_wrapper
+    return function(*(wrapper_args + args))
+  File "/var/spool/torque/mom_priv/jobs/410551.openpbs.mathscluster.ma.ic.ac.uk.SC", line 247, in loss_function
+    xinit_vec=xinit_vec, T0=T0, T=T, length=length)
+  File "/var/spool/torque/mom_priv/jobs/410551.openpbs.mathscluster.ma.ic.ac.uk.SC", line 90, in n_jumpou_simulation
+    xinit_vec, T0, T, length)).transpose()
+  File "/home/ma/c/cs120/.local/lib/python3.6/site-packages/rpy2/robjects/functions.py", line 199, in __call__
+    .__call__(*args, **kwargs))
+  File "/home/ma/c/cs120/.local/lib/python3.6/site-packages/rpy2/robjects/functions.py", line 125, in __call__
+    res = super(Function, self).__call__(*new_args, **new_kwargs)
+  File "/home/ma/c/cs120/.local/lib/python3.6/site-packages/rpy2/rinterface_lib/conversion.py", line 45, in _
+    cdata = function(*args, **kwargs)
+  File "/home/ma/c/cs120/.local/lib/python3.6/site-packages/rpy2/rinterface.py", line 680, in __call__
+    raise embedded.RRuntimeError(_rinterface._geterrmessage())
+rpy2.rinterface_lib.embedded.RRuntimeError: Error in rNIG(n, alpha, beta, delta0 * delta, mu * delta, Lambda) : 
+  alpha must be nonnegative.
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/var/spool/torque/mom_priv/jobs/410551.openpbs.mathscluster.ma.ic.ac.uk.SC", line 313, in <module>
+    result = pool.map(multi_process, iterations)
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 266, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 644, in get
+    raise self._value
+rpy2.rinterface_lib.embedded.RRuntimeError: Error in rNIG(n, alpha, beta, delta0 * delta, mu * delta, Lambda) : 
+  alpha must be nonnegative.
+
+R[write to console]: Warning message:
+
+R[write to console]: In (function (package, help, pos = 2, lib.loc = NULL, character.only = FALSE,  :
+R[write to console]: 
+ 
+R[write to console]:  library ‘/usr/lib/R/site-library’ contains no packages
+
